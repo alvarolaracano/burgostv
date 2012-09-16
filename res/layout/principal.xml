@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/degradado_splash"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="5dp"
+        android:src="@drawable/arriba" />
+    
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_gravity="center_horizontal" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="30dp" >
+			
+            <ImageButton
+                android:id="@+id/botonnoticias"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="15dip"
+                android:background="@drawable/principal_noticias" />
+            
+            <ImageButton
+                android:id="@+id/botonreportajes"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="15dip"
+                android:background="@drawable/principal_reportajes" />
+            
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="30dp" >
+            
+            <ImageButton
+                android:id="@+id/botonmasdeporte"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="15dip"
+                android:background="@drawable/principal_mas_deporte" />
+            
+            <ImageButton
+                android:id="@+id/botonvideoencuentro"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="15dip"
+                android:background="@drawable/principal_videoencuentro" />
+            
+        </TableRow>
+        
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="30dp" >
+            
+            <ImageButton
+                android:id="@+id/botondirecto"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="15dip"
+                android:background="@drawable/principal_directo" />
+            
+            <ImageButton
+                android:id="@+id/botonbuscar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="15dip"
+                android:background="@drawable/principal_buscar" />
+            
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>
