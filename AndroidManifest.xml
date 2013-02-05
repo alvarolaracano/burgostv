@@ -3,9 +3,9 @@
       package="com.alvarolara.burgostv"
       android:versionCode="5"
       android:versionName="1.4">
-    <application android:icon="@drawable/icono" android:label="@string/app_name">
+    <application android:icon="@drawable/icono" android:label="@string/nombre_aplicacion">
         <activity android:name=".SplashActivity" android:screenOrientation="portrait"
-                  android:label="@string/app_name">
+                  android:label="@string/nombre_aplicacion">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,13 +24,13 @@
 			 <data android:scheme="http" android:host="www.burgostv.es" android:pathPattern="/" />
 			</intent-filter>
         </activity>
-        <activity android:name=".ObjetosActivity" android:screenOrientation="portrait">
+        <activity android:name="com.alvarolara.burgostv.ListaActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.alvarolara.burgostv.ObjetosActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>    
         </activity>
-        <activity android:name=".UnObjetoActivity" android:screenOrientation="portrait">
+        <activity android:name="com.alvarolara.burgostv.ObjetoActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.alvarolara.burgostv.UnObjetoActivity" />
                 <category android:name="android.intent.category.DEFAULT" />

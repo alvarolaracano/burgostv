@@ -21,82 +21,83 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-
 import android.util.Log;
 
 public class ParseadorXML {
-	
+
 	/**
-     * Obtener el XML de las noticias de Internet.
-     * @param url
-     * @return
-     */
-    public String getXmlFromUrl(String url) {
-        String xml = null;
- 
-        try {
-            DefaultHttpClient httpClient = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(url);
- 
-            HttpResponse httpResponse = httpClient.execute(httpPost);
-            HttpEntity httpEntity = httpResponse.getEntity();
-            xml = EntityUtils.toString(httpEntity);
- 
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        return xml;
-    }
-    
-    public Document getElementoDom(String xml){
-        Document doc = null;
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        try {
- 
-            DocumentBuilder db = dbf.newDocumentBuilder();
- 
-            InputSource is = new InputSource();
-            is.setEncoding("iso-8859-1");
-            //Log.i("Informacion: ", "antes de entrar");
-            is.setCharacterStream(new StringReader(xml));
-            //Log.i("Informacion: ", "despues de entrar");
-            doc = db.parse(is);
- 
-            } catch (ParserConfigurationException e) {
-                Log.e("Error: ", e.getMessage());
-                return null;
-            } catch (SAXException e) {
-                Log.e("Error: ", e.getMessage());
-                return null;
-            } catch (IOException e) {
-                Log.e("Error: ", e.getMessage());
-                return null;
-            }
-            //Devolver el DOM.
-            return doc;
-    }
-    
-    public String getValor(Element item, String str) {
-        NodeList n = item.getElementsByTagName(str);
-        return this.getValorElemento(n.item(0));
-    }
-     
-    public final String getValorElemento( Node elem ) {
-             Node child;
-             if( elem != null){
-                 if (elem.hasChildNodes()){
-                     for( child = elem.getFirstChild(); child != null; child = child.getNextSibling() ){
-                         if( child.getNodeType() == Node.TEXT_NODE  ){
-                             return child.getNodeValue();
-                         }
-                     }
-                 }
-             }
-             return "";
-      } 
+	 * Obtener el XML de las noticias de Internet.
+	 * 
+	 * @param url
+	 * @return
+	 */
+	public String getXmlFromUrl(String url) {
+		String xml = null;
+
+		try {
+			DefaultHttpClient httpClient = new DefaultHttpClient();
+			HttpPost httpPost = new HttpPost(url);
+
+			HttpResponse httpResponse = httpClient.execute(httpPost);
+			HttpEntity httpEntity = httpResponse.getEntity();
+			xml = EntityUtils.toString(httpEntity);
+
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return xml;
+	}
+
+	public Document getElementoDom(String xml) {
+		Document doc = null;
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		try {
+
+			DocumentBuilder db = dbf.newDocumentBuilder();
+
+			InputSource is = new InputSource();
+			is.setEncoding("iso-8859-1");
+			// Log.i("Informacion: ", "antes de entrar");
+			is.setCharacterStream(new StringReader(xml));
+			// Log.i("Informacion: ", "despues de entrar");
+			doc = db.parse(is);
+
+		} catch (ParserConfigurationException e) {
+			Log.e("Error: ", e.getMessage());
+			return null;
+		} catch (SAXException e) {
+			Log.e("Error: ", e.getMessage());
+			return null;
+		} catch (IOException e) {
+			Log.e("Error: ", e.getMessage());
+			return null;
+		}
+		// Devolver el DOM.
+		return doc;
+	}
+
+	public String getValor(Element item, String str) {
+		NodeList n = item.getElementsByTagName(str);
+		return this.getValorElemento(n.item(0));
+	}
+
+	public final String getValorElemento(Node elem) {
+		Node child;
+		if (elem != null) {
+			if (elem.hasChildNodes()) {
+				for (child = elem.getFirstChild(); child != null; child = child
+						.getNextSibling()) {
+					if (child.getNodeType() == Node.TEXT_NODE) {
+						return child.getNodeValue();
+					}
+				}
+			}
+		}
+		return "";
+	}
 }
