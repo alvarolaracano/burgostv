@@ -1,6 +1,7 @@
 package com.alvarolara.burgostv;
 
 import com.alvarolara.burgostv.async.CargaXML;
+import com.alvarolara.burgostv.utiles.Utilidades;
 
 import android.app.Activity;
 
@@ -19,11 +20,11 @@ import android.widget.Toast;
 public class BuscarActivity extends Activity {
 
 	/**
-	 * Cadena http para la busqueda.
+	 * Variable para la busqueda.
 	 */
-	private static final String URL = "http://www.burgostv.es/android/xml-buscar.php";
 	private String busqueda = "";
 
+	
 	/**
 	 * Llamado cuando la Actividad es creada.
 	 */
@@ -34,7 +35,6 @@ public class BuscarActivity extends Activity {
 		setContentView(R.layout.buscar);
 
 		// Foco en el edittext.
-
 		EditText editTextBuscar = (EditText) findViewById(R.id.editTextBuscar);
 		editTextBuscar.setFocusable(true);
 		editTextBuscar.requestFocus();
@@ -48,12 +48,9 @@ public class BuscarActivity extends Activity {
 		final RadioGroup grupoOrdenar = (RadioGroup) findViewById(R.id.grupoOrdenar);
 		grupoOrdenar.check(R.id.radioFecha1);
 
-		// Asignar ID's a los radiobuttons.
-
+		// Obtener los radiobuttons.
 		final RadioButton radioFecha1 = (RadioButton) findViewById(R.id.radioFecha1);
-		// radioFecha1.setId(RB1_ID);
 		final RadioButton radioPopularidad2 = (RadioButton) findViewById(R.id.radioPopularidad2);
-		// radioPopularidad2.setId(RB2_ID);
 
 		grupoOrdenar
 				.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -104,7 +101,7 @@ public class BuscarActivity extends Activity {
 					busqueda = busqueda.replace(' ', '+');
 
 					// Formar la cadena de busqueda completa.
-					String URL_BUSQUEDA = URL + "?busqueda=" + busqueda
+					String URL_BUSQUEDA = Utilidades.URL_BUSCAR + "?busqueda=" + busqueda
 							+ "&tipo=" + tipo;
 
 					new CargaXML(BuscarActivity.this, URL_BUSQUEDA).execute();

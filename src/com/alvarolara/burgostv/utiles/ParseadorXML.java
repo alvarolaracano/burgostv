@@ -24,6 +24,34 @@ import org.xml.sax.SAXException;
 import android.util.Log;
 
 public class ParseadorXML {
+	
+	/**
+	 * Documento W3C.
+	 */
+	private Document documento;
+	
+	/**
+	 * Lista de nodos.
+	 */
+	private NodeList nodeList;
+	
+	/**
+	 * Elemento W3C.
+	 */
+	private Element elemento;
+	
+	
+	/**
+	 * Crea el parseador con una url y una clave.
+	 * @param url
+	 * @param key
+	 */
+	public ParseadorXML(String url, String key){
+		String xml = getXmlDeUrl(url);
+		documento = getElementoDom(xml);
+		nodeList = documento.getElementsByTagName(key);
+		elemento = (Element) nodeList.item(0);
+	}
 
 	/**
 	 * Obtener el XML de las noticias de Internet.
@@ -31,7 +59,7 @@ public class ParseadorXML {
 	 * @param url
 	 * @return
 	 */
-	public String getXmlFromUrl(String url) {
+	public String getXmlDeUrl(String url) {
 		String xml = null;
 
 		try {
@@ -53,6 +81,12 @@ public class ParseadorXML {
 		return xml;
 	}
 
+	
+	/**
+	 * Obtiene el documento DOM.
+	 * @param xml
+	 * @return
+	 */
 	public Document getElementoDom(String xml) {
 		Document doc = null;
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -62,30 +96,47 @@ public class ParseadorXML {
 
 			InputSource is = new InputSource();
 			is.setEncoding("iso-8859-1");
-			// Log.i("Informacion: ", "antes de entrar");
 			is.setCharacterStream(new StringReader(xml));
-			// Log.i("Informacion: ", "despues de entrar");
 			doc = db.parse(is);
 
 		} catch (ParserConfigurationException e) {
-			Log.e("Error: ", e.getMessage());
+			Log.e("Error al parsear: ", e.getMessage());
 			return null;
 		} catch (SAXException e) {
-			Log.e("Error: ", e.getMessage());
+			Log.e("Error SAX: ", e.getMessage());
 			return null;
 		} catch (IOException e) {
-			Log.e("Error: ", e.getMessage());
+			Log.e("Error IO: ", e.getMessage());
 			return null;
 		}
+		
 		// Devolver el DOM.
 		return doc;
 	}
 
-	public String getValor(Element item, String str) {
-		NodeList n = item.getElementsByTagName(str);
-		return this.getValorElemento(n.item(0));
+	
+	/**
+	 * Devuelve el valor dado un tag.
+	 * @param item
+	 * @param tag
+	 * @return
+	 */
+	public String getValor(String tag) {
+		NodeList nodeList = this.elemento.getElementsByTagName(tag);
+		return this.getValorElemento(nodeList.item(0));
+	}
+	
+	public String getValor(Element elemento, String tag) {
+		NodeList nodeList = elemento.getElementsByTagName(tag);
+		return this.getValorElemento(nodeList.item(0));
 	}
 
+	
+	/**
+	 * Devuelve el valor del elemento.
+	 * @param elem
+	 * @return
+	 */
 	public final String getValorElemento(Node elem) {
 		Node child;
 		if (elem != null) {
@@ -100,4 +151,23 @@ public class ParseadorXML {
 		}
 		return "";
 	}
+
+	
+	/**
+	 * Devuelve el nodeList.
+	 * @return nodeList
+	 */
+	public NodeList getNodeList() {
+		return nodeList;
+	}
+
+	
+	/**
+	 * Establece el nodeList.
+	 * @param nodeList
+	 */
+	public void setNodeList(NodeList nodeList) {
+		this.nodeList = nodeList;
+	}
+	
 }

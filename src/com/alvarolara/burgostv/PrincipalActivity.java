@@ -1,55 +1,30 @@
 package com.alvarolara.burgostv;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import com.alvarolara.burgostv.R;
 import com.alvarolara.burgostv.async.CargaXML;
 import com.alvarolara.burgostv.utiles.ParseadorXML;
+import com.alvarolara.burgostv.utiles.Utilidades;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class PrincipalActivity extends Activity {
-
-	/**
-	 * Constantes para las URLS.
-	 * 
-	 */
-	static final String URL_NOTICIAS = "http://www.burgostv.es/android/xml-noticias.php";
-	static final String URL_REPORTAJES = "http://www.burgostv.es/android/xml-reportajes.php";
-	static final String URL_MAS_DEPORTE = "http://www.burgostv.es/android/xml-mas-deporte.php";
-	static final String URL_VIDEOENCUENTRO = "http://www.burgostv.es/android/xml-burgos-en-persona.php";
-	static final String URL_DIRECTO = "http://www.burgostv.es/android/xml-directo.php";
+	
 
 	/**
 	 * Variables para almacenar los datos obtenidos en el XML.
 	 */
-	String xml = "";
 	String streaming = "";
 	String url_streaming = "";
 	String url_stream = "";
 
-	/**
-	 * Definiciones para el XML.
-	 */
-	public static final String KEY_ITEM = "directo";
-	public static final String KEY_STREAMING = "streaming";
-	public static final String KEY_URL_STREAMING = "url_streaming";
-	public static final String KEY_URL_STREAM = "url_stream";
 
 	/**
 	 * Llamado cuando la Actividad es creada.
@@ -60,25 +35,17 @@ public class PrincipalActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		// Si no hay internet, salimos de la aplicación.
-		if (!hayInternet(this)) {
-			Toast.makeText(this, "Debe disponer de conexión a internet",
-					Toast.LENGTH_LONG).show();
-			finish();
-		} else {
+		if (Utilidades.hayInternet(this)) {
 
 			setContentView(R.layout.principal);
 
 			// Obtener la url del directo leyendo el xml.
-			ParseadorXML parser = new ParseadorXML();
-			xml = parser.getXmlFromUrl(URL_DIRECTO);
-			Document doc = parser.getElementoDom(xml);
-			NodeList nl = doc.getElementsByTagName(KEY_ITEM);
-			Element e = (Element) nl.item(0);
+			ParseadorXML parser = new ParseadorXML(Utilidades.URL_DIRECTO, Utilidades.KEY_ITEM_DIRECTO);
 
 			// Recoger los valores del xml.
-			streaming = parser.getValor(e, KEY_STREAMING);
-			url_streaming = parser.getValor(e, KEY_URL_STREAMING);
-			url_stream = parser.getValor(e, KEY_URL_STREAM);
+			streaming = parser.getValor(Utilidades.KEY_STREAMING);
+			url_streaming = parser.getValor(Utilidades.KEY_URL_STREAMING);
+			url_stream = parser.getValor(Utilidades.KEY_URL_STREAM);
 
 			/**
 			 * NOTICIAS.
@@ -90,8 +57,7 @@ public class PrincipalActivity extends Activity {
 				public void onClick(View v) {
 					// Al hacer click en el boton. Llamar a CargaXML y que esta
 					// llame a NoticiasActivity.
-
-					new CargaXML(PrincipalActivity.this, URL_NOTICIAS)
+					new CargaXML(PrincipalActivity.this, Utilidades.URL_NOTICIAS)
 							.execute();
 
 				}
@@ -108,7 +74,7 @@ public class PrincipalActivity extends Activity {
 					// Al hacer click en el boton. Llamar a CargaXML y que esta
 					// llame a NoticiasActivity.
 
-					new CargaXML(PrincipalActivity.this, URL_REPORTAJES)
+					new CargaXML(PrincipalActivity.this, Utilidades.URL_REPORTAJES)
 							.execute();
 
 				}
@@ -125,7 +91,7 @@ public class PrincipalActivity extends Activity {
 					// Al hacer click en el boton. Llamar a CargaXML y que esta
 					// llame a NoticiasActivity.
 
-					new CargaXML(PrincipalActivity.this, URL_MAS_DEPORTE)
+					new CargaXML(PrincipalActivity.this, Utilidades.URL_MAS_DEPORTE)
 							.execute();
 
 				}
@@ -142,7 +108,7 @@ public class PrincipalActivity extends Activity {
 					// Al hacer click en el boton. Llamar a CargaXML y que esta
 					// llame a NoticiasActivity.
 
-					new CargaXML(PrincipalActivity.this, URL_VIDEOENCUENTRO)
+					new CargaXML(PrincipalActivity.this, Utilidades.URL_VIDEOENCUENTRO)
 							.execute();
 
 				}
@@ -156,11 +122,11 @@ public class PrincipalActivity extends Activity {
 			botondirecto.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
-					if (streaming.contains("SI")) {
+					if (streaming.contains("NO")) {
 						// Pasarle al videoView la url del streaming.
 						Intent in = new Intent(getApplicationContext(),
 								DirectoActivity.class);
-						in.putExtra(KEY_URL_STREAMING, url_streaming
+						in.putExtra(Utilidades.KEY_URL_STREAMING, url_streaming
 								+ url_stream);
 						Log.i("video: ->", url_streaming + url_stream);
 						startActivity(in);
@@ -192,36 +158,5 @@ public class PrincipalActivity extends Activity {
 
 		}
 	}
-
-	/**
-	 * Funcion que comprueba si hay internet o no.
-	 * 
-	 * @param a
-	 */
-	public static boolean hayInternet(Activity a) {
-		boolean hayWifi = false;
-		boolean hayMobile = false;
-
-		ConnectivityManager cm = (ConnectivityManager) a
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo[] netInfo = cm.getAllNetworkInfo();
-
-		for (NetworkInfo ni : netInfo) {
-			if (ni.getTypeName().equalsIgnoreCase("wifi"))
-				if (ni.isConnected()) {
-					hayWifi = true;
-				}
-			if (ni.getTypeName().equalsIgnoreCase("mobile"))
-				if (ni.isConnected()) {
-					hayMobile = true;
-				}
-		}
-
-		// Si no hay wifi o no hay conexión de red, cerramos la aplicación.
-		if (hayWifi == false && hayMobile == false) {
-
-			return false;
-		}
-		return true;
-	}
+	
 }

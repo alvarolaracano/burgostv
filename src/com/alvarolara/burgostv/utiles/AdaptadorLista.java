@@ -17,60 +17,97 @@ import android.widget.TextView;
 
 public class AdaptadorLista extends BaseAdapter {
 
-	private Activity activity;
-	private ArrayList<HashMap<String, String>> data;
+	/**
+	 * Actividad.
+	 */
+	private Activity actividad;
+	
+	/**
+	 * Items del Menu.
+	 */
+	private ArrayList<HashMap<String, String>> menuItems;
+	
+	/**
+	 * Inflater.
+	 */
 	private static LayoutInflater inflater = null;
-	public ImageLoader imageLoader;
+	
+	/**
+	 * Cargador de imagenes.
+	 */
+	public CargadorImagenes cargadorImagenes;
 
-	public AdaptadorLista(Activity a, ArrayList<HashMap<String, String>> d) {
-		activity = a;
-		data = d;
-		inflater = (LayoutInflater) activity
+	
+	/**
+	 * 
+	 * @param actividad
+	 * @param menuItems
+	 */
+	public AdaptadorLista(Activity actividad, ArrayList<HashMap<String, String>> menuItems) {
+		this.actividad = actividad;
+		this.menuItems = menuItems;
+		inflater = (LayoutInflater) this.actividad
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		imageLoader = new ImageLoader(activity.getApplicationContext());
+		cargadorImagenes = new CargadorImagenes(this.actividad.getApplicationContext());
 	}
 
+	
+	/**
+	 * Numero de elementos.
+	 */
 	public int getCount() {
-		return data.size();
+		return menuItems.size();
 	}
 
+	
+	/**
+	 * Devuelve el item del entero que solicitas.
+	 */
 	public Object getItem(int position) {
 		return position;
 	}
 
+	
+	/**
+	 * Devuelve la posicion.
+	 */
 	public long getItemId(int position) {
 		return position;
 	}
 
+	
+	/**
+	 * Adapta el contenido al layout.
+	 */
 	public View getView(int position, View convertView, ViewGroup parent) {
-		View vi = convertView;
+		View vista = convertView;
 		if (convertView == null)
-			vi = inflater.inflate(R.layout.lista_filas, null);
+			vista = inflater.inflate(R.layout.lista_filas, null);
 
-		TextView titulo = (TextView) vi.findViewById(R.id.titulo);
-		TextView descripcion = (TextView) vi.findViewById(R.id.descripcion);
-		TextView url_video = (TextView) vi.findViewById(R.id.url_video);
-		ImageView url_foto = (ImageView) vi.findViewById(R.id.url_foto);
-		TextView fecha = (TextView) vi.findViewById(R.id.fecha);
+		TextView titulo = (TextView) vista.findViewById(R.id.titulo);
+		TextView descripcion = (TextView) vista.findViewById(R.id.descripcion);
+		TextView url_video = (TextView) vista.findViewById(R.id.url_video);
+		ImageView url_foto = (ImageView) vista.findViewById(R.id.url_foto);
+		TextView fecha = (TextView) vista.findViewById(R.id.fecha);
 		// Url de la foto del textview Oculto.
-		TextView url_foto_textview = (TextView) vi
+		TextView url_foto_textview = (TextView) vista
 				.findViewById(R.id.url_foto_textview);
 
 		HashMap<String, String> objeto = new HashMap<String, String>();
-		objeto = data.get(position);
+		objeto = menuItems.get(position);
 
 		// Colocar los valores en el ListView.
-		titulo.setText(objeto.get(CargaXML.KEY_TITULO));
-		descripcion.setText(objeto.get(CargaXML.KEY_DESCRIPCION));
-		url_video.setText(objeto.get(CargaXML.KEY_URL_VIDEO));
-		fecha.setText(objeto.get(CargaXML.KEY_FECHA));
+		titulo.setText(objeto.get(Utilidades.KEY_TITULO));
+		descripcion.setText(objeto.get(Utilidades.KEY_DESCRIPCION));
+		url_video.setText(objeto.get(Utilidades.KEY_URL_VIDEO));
+		fecha.setText(objeto.get(Utilidades.KEY_FECHA));
 
 		// Cargar la URL para pasarla mediante un Intent.
-		url_foto_textview.setText(objeto.get(CargaXML.KEY_URL_FOTO));
+		url_foto_textview.setText(objeto.get(Utilidades.KEY_URL_FOTO));
 
 		// Dibujar la imagen.
-		imageLoader.DisplayImage(objeto.get(CargaXML.KEY_URL_FOTO), url_foto,
+		cargadorImagenes.muestraImagen(objeto.get(Utilidades.KEY_URL_FOTO), url_foto,
 				"P");
-		return vi;
+		return vista;
 	}
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.alvarolara.burgostv.async.CargaXML;
 import com.alvarolara.burgostv.utiles.AdaptadorLista;
+import com.alvarolara.burgostv.utiles.Utilidades;
 import com.alvarolara.burgostv.R;
 
 import android.app.ListActivity;
@@ -20,13 +21,24 @@ import android.widget.TextView;
 
 public class ListaActivity extends ListActivity {
 
+	/**
+	 * Elementos de la lista.
+	 */
 	ArrayList<HashMap<String, String>> menuItems;
 
+	/**
+	 * Listview.
+	 */
 	ListView lista;
+	
+	/**
+	 * Adaptador de la lista.
+	 */
 	AdaptadorLista adaptador;
 
+	
 	/**
-	 * Se llama cuando la actividad es creada.
+	 * Llamado cuando la Actividad es creada.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -51,11 +63,7 @@ public class ListaActivity extends ListActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// Comprobar la conexion a internet.
-				if (!PrincipalActivity.hayInternet(ListaActivity.this)) {
-					Toast.makeText(ListaActivity.this,
-							"Debe disponer de conexión a internet",
-							Toast.LENGTH_LONG).show();
-				} else {
+				if (Utilidades.hayInternet(ListaActivity.this)) {
 
 					// Obtener valores de los objetos.
 					String titulo = ((TextView) view.findViewById(R.id.titulo))
@@ -63,9 +71,6 @@ public class ListaActivity extends ListActivity {
 					String descripcion = ((TextView) view
 							.findViewById(R.id.descripcion)).getText()
 							.toString();
-					String fecha = ((TextView) view.findViewById(R.id.fecha))
-							.getText().toString();
-
 					String url_foto = ((TextView) view
 							.findViewById(R.id.url_foto_textview)).getText()
 							.toString();
@@ -75,10 +80,10 @@ public class ListaActivity extends ListActivity {
 					// Nuevo intent de texto.
 					Intent in = new Intent(getApplicationContext(),
 							ObjetoActivity.class);
-					in.putExtra(CargaXML.KEY_TITULO, titulo);
-					in.putExtra(CargaXML.KEY_URL_FOTO, url_foto);
-					in.putExtra(CargaXML.KEY_DESCRIPCION, descripcion);
-					in.putExtra(CargaXML.KEY_URL_VIDEO, url_video);
+					in.putExtra(Utilidades.KEY_TITULO, titulo);
+					in.putExtra(Utilidades.KEY_URL_FOTO, url_foto);
+					in.putExtra(Utilidades.KEY_DESCRIPCION, descripcion);
+					in.putExtra(Utilidades.KEY_URL_VIDEO, url_video);
 					startActivity(in);
 				}
 			}

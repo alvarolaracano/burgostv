@@ -6,10 +6,19 @@ import java.util.HashMap;
 import java.util.Map;
 import android.graphics.Bitmap;
 
-public class MemoryCache {
+public class CacheMemoria {
+	
+	/**
+	 * Mapa de Bitmaps para la memoria.
+	 */
 	private Map<String, SoftReference<Bitmap>> cache = Collections
 			.synchronizedMap(new HashMap<String, SoftReference<Bitmap>>());
 
+	/**
+	 * Devuelve el Bitmap segun la id.
+	 * @param id
+	 * @return
+	 */
 	public Bitmap get(String id) {
 		if (!cache.containsKey(id))
 			return null;
@@ -17,11 +26,21 @@ public class MemoryCache {
 		return ref.get();
 	}
 
+	
+	/**
+	 * Pone en la cache la id y el bitmap.
+	 * @param id
+	 * @param bitmap
+	 */
 	public void put(String id, Bitmap bitmap) {
 		cache.put(id, new SoftReference<Bitmap>(bitmap));
 	}
 
-	public void clear() {
+	
+	/**
+	 * Limpia la cache.
+	 */
+	public void limpiaCacheMemoria() {
 		cache.clear();
 	}
 }

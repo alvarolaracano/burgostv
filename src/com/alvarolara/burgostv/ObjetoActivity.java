@@ -1,39 +1,23 @@
 package com.alvarolara.burgostv;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
-import com.alvarolara.burgostv.async.CargaXML;
-import com.alvarolara.burgostv.utiles.ImageLoader;
+import com.alvarolara.burgostv.utiles.CargadorImagenes;
 import com.alvarolara.burgostv.utiles.ParseadorXML;
 import com.alvarolara.burgostv.utiles.JustificaTexto;
+import com.alvarolara.burgostv.utiles.Utilidades;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
 
 public class ObjetoActivity extends Activity {
-
-	// Claves xml del nodo.
-	static final String KEY_TITULO = "titulo";
-	static final String KEY_DESCRIPCION = "descripcion";
-	static final String KEY_URL_FOTO = "url_foto";
-	static final String KEY_URL_VIDEO = "url_video";
 
 	/**
 	 * Titulo del objeto.
@@ -55,6 +39,10 @@ public class ObjetoActivity extends Activity {
 	 */
 	String url_video = "";
 
+	
+	/**
+	 * Llamado cuando la Actividad es creada.
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,7 +52,7 @@ public class ObjetoActivity extends Activity {
 		// Obtener datos del intent.
 		Intent in = getIntent();
 		// Saber la procedencia del intent, recogiendo datos como el titulo.
-		if (in.getSerializableExtra(KEY_TITULO) == null) {
+		if (in.getSerializableExtra(Utilidades.KEY_TITULO) == null) {
 
 			String url = "http://www.burgostv.es/android/xml-url.php?tipo=";
 
@@ -113,11 +101,11 @@ public class ObjetoActivity extends Activity {
 		} else {
 
 			// Obtener los datos del intent anterior.
-			titulo = in.getStringExtra(KEY_TITULO);
-			url_foto = in.getStringExtra(KEY_URL_FOTO);
+			titulo = in.getStringExtra(Utilidades.KEY_TITULO);
+			url_foto = in.getStringExtra(Utilidades.KEY_URL_FOTO);
 
-			descripcion = in.getStringExtra(KEY_DESCRIPCION);
-			url_video = in.getStringExtra(KEY_URL_VIDEO);
+			descripcion = in.getStringExtra(Utilidades.KEY_DESCRIPCION);
+			url_video = in.getStringExtra(Utilidades.KEY_URL_VIDEO);
 
 		}
 
@@ -130,8 +118,9 @@ public class ObjetoActivity extends Activity {
 		lblTitulo.setText(titulo);
 
 		// Cargar la nueva imagen a partir de la URL.
-		ImageLoader imageLoader = new ImageLoader(getApplicationContext());
-		imageLoader.DisplayImage(url_foto, lblUrl_foto, "G");
+		CargadorImagenes cargadorImagenes = new CargadorImagenes(getApplicationContext());
+		//Cargarla en tamano grande G.
+		cargadorImagenes.muestraImagen(url_foto, lblUrl_foto, "G");
 
 		// Toast.makeText(getApplicationContext(), url_foto,
 		// Toast.LENGTH_LONG).show();
@@ -148,15 +137,12 @@ public class ObjetoActivity extends Activity {
 
 			public void onClick(View v) {
 				// Comprobar la conexion a internet.
-				if (!PrincipalActivity.hayInternet(ObjetoActivity.this)) {
-					Toast.makeText(ObjetoActivity.this,
-							"Debe disponer de conexión a internet",
-							Toast.LENGTH_LONG).show();
-				} else {
+				if (Utilidades.hayInternet(ObjetoActivity.this)) {
+					
 					// Intent para videoactivity.
 					Intent in = new Intent(getApplicationContext(),
 							VideoActivity.class);
-					in.putExtra(KEY_URL_VIDEO, url_video);
+					in.putExtra(Utilidades.KEY_URL_VIDEO, url_video);
 					startActivity(in);
 				}
 			}
@@ -166,29 +152,20 @@ public class ObjetoActivity extends Activity {
 
 	public void cargaXml(String url) {
 
-		ArrayList<HashMap<String, String>> menuItems = new ArrayList<HashMap<String, String>>();
-
-		ParseadorXML parser = new ParseadorXML();
-
-		String xml = parser.getXmlFromUrl(url);
-
-		Document doc = parser.getElementoDom(xml);
-
-		NodeList nl = doc.getElementsByTagName(CargaXML.KEY_ITEM);
-
-		// Si la longitud del nodelist es 0 al buscar la clave 'item',
-		// lanzamos excepcion.
+		ParseadorXML parser = new ParseadorXML(url, Utilidades.KEY_ITEM_OBJETO);
 
 		try {
-			if (nl.getLength() == 0) {
+			
+			// Si la longitud del nodelist es 0 al buscar la clave 'item',
+			// lanzamos excepcion.
+			if (parser.getNodeList().getLength() == 0) {
 				throw new Exception();
 			} else {
-				Element e = (Element) nl.item(0);
 				// Añadir cada nodo hijo al hashmap con clave=> valor.
-				titulo = parser.getValor(e, KEY_TITULO);
-				descripcion = parser.getValor(e, KEY_DESCRIPCION);
-				url_foto = parser.getValor(e, KEY_URL_FOTO);
-				url_video = parser.getValor(e, KEY_URL_VIDEO);
+				titulo = parser.getValor(Utilidades.KEY_TITULO);
+				descripcion = parser.getValor(Utilidades.KEY_DESCRIPCION);
+				url_foto = parser.getValor(Utilidades.KEY_URL_FOTO);
+				url_video = parser.getValor(Utilidades.KEY_URL_VIDEO);
 			}
 		} catch (Exception e) {
 			Toast.makeText(getApplicationContext(), "Error al abrir la URL.",

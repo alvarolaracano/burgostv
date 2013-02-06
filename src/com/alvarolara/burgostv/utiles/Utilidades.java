@@ -1,6 +1,43 @@
 package com.alvarolara.burgostv.utiles;
 
+import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.widget.Toast;
+
 public class Utilidades {
+	
+	/**
+	 * Constantes para las URLS.
+	 * 
+	 */
+	public static final String URL_NOTICIAS = "http://www.burgostv.es/android/xml-noticias.php";
+	public static final String URL_REPORTAJES = "http://www.burgostv.es/android/xml-reportajes.php";
+	public static final String URL_MAS_DEPORTE = "http://www.burgostv.es/android/xml-mas-deporte.php";
+	public static final String URL_VIDEOENCUENTRO = "http://www.burgostv.es/android/xml-burgos-en-persona.php";
+	public static final String URL_DIRECTO = "http://www.burgostv.es/android/xml-directo.php";
+	public static final String URL_BUSCAR = "http://www.burgostv.es/android/xml-buscar.php";
+	
+	
+	/**
+	 * Definiciones XML para el STREAMING.
+	 */
+	public static final String KEY_ITEM_DIRECTO = "directo";
+	public static final String KEY_STREAMING = "streaming";
+	public static final String KEY_URL_STREAMING = "url_streaming";
+	public static final String KEY_URL_STREAM = "url_stream";
+	
+	/**
+	 * Definiciones XML para un OBJETO.
+	 */
+	public static final String KEY_ITEM_OBJETO = "item";
+	public static final String KEY_TITULO = "titulo";
+	public static final String KEY_DESCRIPCION = "descripcion";
+	public static final String KEY_URL_FOTO = "url_foto";
+	public static final String KEY_URL_VIDEO = "url_video";
+	public static final String KEY_FECHA = "fecha";
+	
 
 	/**
 	 * Funcion que convierte milisegundos a formato Timer.
@@ -66,5 +103,40 @@ public class Utilidades {
 
 		// Duracion actual en milisegundos.
 		return duracionActual * 1000;
+	}
+	
+	
+	/**
+	 * Funcion que comprueba si hay internet o no.
+	 * 
+	 * @param aactividad
+	 */
+	public static boolean hayInternet(Activity actividad) {
+		boolean hayWifi = false;
+		boolean hayMobile = false;
+
+		ConnectivityManager cm = (ConnectivityManager) actividad
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+
+		for (NetworkInfo ni : netInfo) {
+			if (ni.getTypeName().equalsIgnoreCase("wifi"))
+				if (ni.isConnected()) {
+					hayWifi = true;
+				}
+			if (ni.getTypeName().equalsIgnoreCase("mobile"))
+				if (ni.isConnected()) {
+					hayMobile = true;
+				}
+		}
+
+		// Si no hay wifi o no hay conexión de red, cerramos la aplicación.
+		if (hayWifi == false && hayMobile == false) {
+			Toast.makeText(actividad, "Debe disponer de conexión a internet",
+					Toast.LENGTH_LONG).show();
+			((Activity)actividad).finish();
+			return false;
+		}
+		return true;
 	}
 }
