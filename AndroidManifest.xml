@@ -4,14 +4,13 @@
       android:versionCode="5"
       android:versionName="1.4">
     <application android:icon="@drawable/icono" android:label="@string/nombre_aplicacion">
-        <activity android:name=".SplashActivity" android:screenOrientation="portrait"
-                  android:label="@string/nombre_aplicacion">
+        <activity android:name="com.alvarolara.burgostv.SplashActivity" android:label="@string/nombre_aplicacion">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PrincipalActivity" android:screenOrientation="portrait">
+        <activity android:name="com.alvarolara.burgostv.PrincipalActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.alvarolara.burgostv.PrincipalActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -46,31 +45,31 @@
 			 <data android:scheme="http" android:host="www.burgostv.es" android:pathPattern="/burgos-en-persona/.*" />
 			</intent-filter>
         </activity>
-        <activity android:name=".BuscarActivity" android:screenOrientation="portrait">
+        <activity android:name="com.alvarolara.burgostv.BuscarActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.alvarolara.burgostv.BuscarActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>    
         </activity>
-        <activity android:name=".BusquedaActivity" android:screenOrientation="portrait">
+        <activity android:name="com.alvarolara.burgostv.BusquedaActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.alvarolara.burgostv.BusquedaActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>    
         </activity>
-        <activity android:name=".VideoActivity" android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        <activity android:name="com.alvarolara.burgostv.VideoActivity" android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="com.alvarolara.burgostv.VideoActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>    
         </activity>
-        <activity android:name=".DirectoActivity" android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        <activity android:name="com.alvarolara.burgostv.DirectoActivity" android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="com.alvarolara.burgostv.DirectoActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>    
         </activity>
-        <activity android:name=".ErrorActivity" android:screenOrientation="portrait">
+        <activity android:name="com.alvarolara.burgostv.ErrorActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.alvarolara.burgostv.ErrorActivity" />
                 <category android:name="android.intent.category.DEFAULT" />

@@ -137,7 +137,7 @@ public class ObjetoActivity extends Activity {
 
 			public void onClick(View v) {
 				// Comprobar la conexion a internet.
-				if (Utilidades.hayInternet(ObjetoActivity.this)) {
+				if (Utilidades.hayInternet(ObjetoActivity.this, false)) {
 					
 					// Intent para videoactivity.
 					Intent in = new Intent(getApplicationContext(),

@@ -7,6 +7,7 @@ import com.alvarolara.burgostv.utiles.Utilidades;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,7 +36,14 @@ public class PrincipalActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		// Si no hay internet, salimos de la aplicación.
-		if (Utilidades.hayInternet(this)) {
+		if (Utilidades.hayInternet(this, true)) {
+			
+			//Establecer layout segun telefono o tablet.
+			if(getResources().getString(R.string.tipo_pantalla).equals("telefono")){
+				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+			}else{
+				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+			}
 
 			setContentView(R.layout.principal);
 
@@ -56,9 +64,11 @@ public class PrincipalActivity extends Activity {
 
 				public void onClick(View v) {
 					// Al hacer click en el boton. Llamar a CargaXML y que esta
-					// llame a NoticiasActivity.
-					new CargaXML(PrincipalActivity.this, Utilidades.URL_NOTICIAS)
-							.execute();
+					// llame a ListaActivity.
+					if (Utilidades.hayInternet(PrincipalActivity.this, false)) {
+						new CargaXML(PrincipalActivity.this, Utilidades.URL_NOTICIAS)
+								.execute();
+					}
 
 				}
 			});
@@ -72,10 +82,11 @@ public class PrincipalActivity extends Activity {
 
 				public void onClick(View v) {
 					// Al hacer click en el boton. Llamar a CargaXML y que esta
-					// llame a NoticiasActivity.
-
-					new CargaXML(PrincipalActivity.this, Utilidades.URL_REPORTAJES)
-							.execute();
+					// llame a ListaActivity.
+					if (Utilidades.hayInternet(PrincipalActivity.this, false)) {
+						new CargaXML(PrincipalActivity.this, Utilidades.URL_REPORTAJES)
+								.execute();
+					}
 
 				}
 			});
@@ -89,10 +100,11 @@ public class PrincipalActivity extends Activity {
 
 				public void onClick(View v) {
 					// Al hacer click en el boton. Llamar a CargaXML y que esta
-					// llame a NoticiasActivity.
-
-					new CargaXML(PrincipalActivity.this, Utilidades.URL_MAS_DEPORTE)
-							.execute();
+					// llame a ListaActivity.
+					if (Utilidades.hayInternet(PrincipalActivity.this, false)) {
+						new CargaXML(PrincipalActivity.this, Utilidades.URL_MAS_DEPORTE)
+								.execute();
+					}
 
 				}
 			});
@@ -106,10 +118,11 @@ public class PrincipalActivity extends Activity {
 
 				public void onClick(View v) {
 					// Al hacer click en el boton. Llamar a CargaXML y que esta
-					// llame a NoticiasActivity.
-
-					new CargaXML(PrincipalActivity.this, Utilidades.URL_VIDEOENCUENTRO)
-							.execute();
+					// llame a ListaActivity.
+					if (Utilidades.hayInternet(PrincipalActivity.this, false)) {
+						new CargaXML(PrincipalActivity.this, Utilidades.URL_VIDEOENCUENTRO)
+								.execute();
+					}
 
 				}
 			});
@@ -122,14 +135,16 @@ public class PrincipalActivity extends Activity {
 			botondirecto.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
-					if (streaming.contains("NO")) {
+					if (streaming.contains("SI")) {
 						// Pasarle al videoView la url del streaming.
-						Intent in = new Intent(getApplicationContext(),
-								DirectoActivity.class);
-						in.putExtra(Utilidades.KEY_URL_STREAMING, url_streaming
-								+ url_stream);
-						Log.i("video: ->", url_streaming + url_stream);
-						startActivity(in);
+						if (Utilidades.hayInternet(PrincipalActivity.this, false)) {
+							Intent in = new Intent(getApplicationContext(),
+									DirectoActivity.class);
+							in.putExtra(Utilidades.KEY_URL_STREAMING, url_streaming
+									+ url_stream);
+							Log.i("video: ->", url_streaming + url_stream);
+							startActivity(in);
+						}
 					} else {
 						// Toast mostrando que no hay emisión actualmente.
 						Toast.makeText(PrincipalActivity.this,

@@ -63,7 +63,7 @@ public class ListaActivity extends ListActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// Comprobar la conexion a internet.
-				if (Utilidades.hayInternet(ListaActivity.this)) {
+				if (Utilidades.hayInternet(ListaActivity.this, false)) {
 
 					// Obtener valores de los objetos.
 					String titulo = ((TextView) view.findViewById(R.id.titulo))

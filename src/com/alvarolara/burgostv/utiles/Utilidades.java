@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 import android.widget.Toast;
 
 public class Utilidades {
@@ -109,9 +110,10 @@ public class Utilidades {
 	/**
 	 * Funcion que comprueba si hay internet o no.
 	 * 
-	 * @param aactividad
+	 * @param salir
+	 * @param actividad
 	 */
-	public static boolean hayInternet(Activity actividad) {
+	public static boolean hayInternet(Activity actividad, Boolean salir) {
 		boolean hayWifi = false;
 		boolean hayMobile = false;
 
@@ -132,8 +134,10 @@ public class Utilidades {
 
 		// Si no hay wifi o no hay conexión de red, cerramos la aplicación.
 		if (hayWifi == false && hayMobile == false) {
+			Log.i("internet", "no hay internet");
 			Toast.makeText(actividad, "Debe disponer de conexión a internet",
 					Toast.LENGTH_LONG).show();
+			if(salir)
 			((Activity)actividad).finish();
 			return false;
 		}

@@ -75,38 +75,39 @@ public class BuscarActivity extends Activity {
 
 			public void onClick(View v) {
 				// Al hacer click en el boton.
-
-				// Obtener el tipo para enviarlo al Intent.
-				String tipo = "1";
-				if (grupoOrdenar.getCheckedRadioButtonId() == R.id.radioFecha1) {
-					tipo = "1";
-					// Log.i("checkbox1", "tipo=1");
-				} else if (grupoOrdenar.getCheckedRadioButtonId() == R.id.radioPopularidad2) {
-					tipo = "2";
-					// Log.i("checkbox2", "tipo=2");
-				}
-
-				EditText editTextBuscar = (EditText) findViewById(R.id.editTextBuscar);
-				busqueda = editTextBuscar.getText().toString();
-
-				if (busqueda.length() < 2) {
-
-					// Mensaje de error
-					Toast.makeText(BuscarActivity.this,
-							"La búsqueda es demasido corta", Toast.LENGTH_LONG)
-							.show();
-
-				} else {
-					// Reemplazar espacios en blanco por '+'.
-					busqueda = busqueda.replace(' ', '+');
-
-					// Formar la cadena de busqueda completa.
-					String URL_BUSQUEDA = Utilidades.URL_BUSCAR + "?busqueda=" + busqueda
-							+ "&tipo=" + tipo;
-
-					new CargaXML(BuscarActivity.this, URL_BUSQUEDA).execute();
-					Log.i("cadena de busqueda: ", URL_BUSQUEDA);
-
+				if (Utilidades.hayInternet(BuscarActivity.this, false)) {
+					// Obtener el tipo para enviarlo al Intent.
+					String tipo = "1";
+					if (grupoOrdenar.getCheckedRadioButtonId() == R.id.radioFecha1) {
+						tipo = "1";
+						// Log.i("checkbox1", "tipo=1");
+					} else if (grupoOrdenar.getCheckedRadioButtonId() == R.id.radioPopularidad2) {
+						tipo = "2";
+						// Log.i("checkbox2", "tipo=2");
+					}
+	
+					EditText editTextBuscar = (EditText) findViewById(R.id.editTextBuscar);
+					busqueda = editTextBuscar.getText().toString();
+	
+					if (busqueda.length() < 2) {
+	
+						// Mensaje de error
+						Toast.makeText(BuscarActivity.this,
+								"La búsqueda es demasido corta", Toast.LENGTH_LONG)
+								.show();
+	
+					} else {
+						// Reemplazar espacios en blanco por '+'.
+						busqueda = busqueda.replace(' ', '+');
+	
+						// Formar la cadena de busqueda completa.
+						String URL_BUSQUEDA = Utilidades.URL_BUSCAR + "?busqueda=" + busqueda
+								+ "&tipo=" + tipo;
+	
+						new CargaXML(BuscarActivity.this, URL_BUSQUEDA).execute();
+						Log.i("cadena de busqueda: ", URL_BUSQUEDA);
+	
+					}
 				}
 			}
 		});
