@@ -4,9 +4,14 @@ import java.io.File;
 import java.net.URI;
 
 import com.alvarolara.burgostv.R;
+import com.alvarolara.burgostv.VideoActivity;
 import com.alvarolara.burgostv.utiles.CargadorImagenes;
+import com.alvarolara.burgostv.utiles.Utilidades;
 
 import android.support.v4.app.Fragment;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,7 +35,6 @@ public class ObjetoDetalleFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.e("Test", "hello");
 	}
 
 	@Override
@@ -46,26 +50,28 @@ public class ObjetoDetalleFragment extends Fragment {
 		return view;
 	}
 
+	/**
+	 * Establece el titulo.
+	 * @param titulo
+	 */
 	public void setTitulo(String titulo) {
 		TextView  TVtitulo= (TextView) getView().findViewById(R.id.titulo);
 		TVtitulo.setText(titulo);
 	}
-	/*
-	public void setFecha(String fecha) {
-		TextView TVfechaDetalle = (TextView) getView().findViewById(R.id.TVfechaDetalle);
-		TVfechaDetalle.setText(fecha);
-	}*/
-	/*
-	public void ocultaDetalleVacio(){
-		TextView view = (TextView) getView().findViewById(R.id.TVdetalleVacio);
-		view.setVisibility(View.GONE);
-		RelativeLayout rel = (RelativeLayout) getView().findViewById(R.id.RLdetalleVacio);
-		rel.setVisibility(View.GONE);
-	}*/
+	
+	/**
+	 * Establece la descripcion.
+	 * @param descripcion
+	 */
 	public void setDescripcion(String descripcion){
 		TextView TVdescripcion = (TextView) getView().findViewById(R.id.descripcion);
 		TVdescripcion.setText(descripcion);
 	}
+	
+	/**
+	 * Establece la imagen.
+	 * @param imagen
+	 */
 	public void setImagen(String imagen){
 		
 		//Poner la imagen como parametro.
@@ -74,8 +80,29 @@ public class ObjetoDetalleFragment extends Fragment {
 		// Cargar la nueva imagen a partir de la URL.
 		CargadorImagenes cargadorImagenes = new CargadorImagenes(getActivity().getApplicationContext());
 		//Cargarla en tamano grande G.
-		cargadorImagenes.muestraImagen("url_foto", IVurl_foto, "G");
+		cargadorImagenes.muestraImagen(imagen, IVurl_foto, "G");
 		
+	}
+	
+	public void setOnClickListenerImagen(final Activity actividad, final String url_video){
+		//Evento en el reproductor.
+		ImageView lblUrl_foto = (ImageView) getView().findViewById(R.id.url_foto);
+		lblUrl_foto.setAlpha(200);
+		
+		lblUrl_foto.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				// Comprobar la conexion a internet.
+				if (Utilidades.hayInternet(actividad, false)) {
+					
+					// Intent para videoactivity.
+					Intent in = new Intent(getActivity().getApplicationContext(),
+							VideoActivity.class);
+					in.putExtra(Utilidades.KEY_URL_VIDEO, url_video);
+					startActivity(in);
+				}
+			}
+		});
 	}
 	
 }

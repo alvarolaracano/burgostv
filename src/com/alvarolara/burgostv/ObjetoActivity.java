@@ -131,9 +131,9 @@ public class ObjetoActivity extends Activity {
 		JustificaTexto.justifica(((TextView) findViewById(R.id.descripcion)),
 				340f);
 
-		ImageView imagen = (ImageView) findViewById(R.id.url_foto);
+		
 
-		imagen.setOnClickListener(new View.OnClickListener() {
+		lblUrl_foto.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
 				// Comprobar la conexion a internet.
