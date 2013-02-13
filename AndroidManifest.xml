@@ -75,6 +75,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>    
         </activity>
+        <activity android:name="com.alvarolara.burgostv.fragment.ObjetoActivity" android:screenOrientation="landscape">
+        </activity>
+        <activity android:name="com.alvarolara.burgostv.fragment.ObjetoDetalleFragment" android:screenOrientation="landscape">
+        </activity>
+        <activity android:name="com.alvarolara.burgostv.fragment.ObjetoListaFragment" android:screenOrientation="landscape">
+        </activity>
     </application>
     <uses-sdk android:minSdkVersion="8" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

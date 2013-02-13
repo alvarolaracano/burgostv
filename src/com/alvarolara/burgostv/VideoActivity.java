@@ -23,8 +23,6 @@ import android.widget.VideoView;
 public class VideoActivity extends Activity implements OnCompletionListener,
 		SeekBar.OnSeekBarChangeListener {
 
-	// private static final String path
-	// ="http://www.burgostv.es/noticias/2012/julio/25-07-12_2-SD.mp4";
 	private VideoView video;
 	private MediaController ctlr;
 	private SeekBar seek;

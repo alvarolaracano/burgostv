@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.alvarolara.burgostv.async.CargaXML;
+import com.alvarolara.burgostv.clases.Objeto;
 import com.alvarolara.burgostv.utiles.AdaptadorLista;
 import com.alvarolara.burgostv.utiles.Utilidades;
 import com.alvarolara.burgostv.R;
@@ -24,7 +25,7 @@ public class ListaActivity extends ListActivity {
 	/**
 	 * Elementos de la lista.
 	 */
-	ArrayList<HashMap<String, String>> menuItems;
+	ArrayList<Objeto> menuItems;
 
 	/**
 	 * Listview.
@@ -49,7 +50,7 @@ public class ListaActivity extends ListActivity {
 
 		// Recoger el hashmap mediante un intent.
 
-		menuItems = (ArrayList<HashMap<String, String>>) getIntent()
+		menuItems = (ArrayList<Objeto>) getIntent()
 				.getSerializableExtra("xml");
 
 		lista = (ListView) findViewById(android.R.id.list);

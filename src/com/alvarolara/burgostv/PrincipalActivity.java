@@ -25,6 +25,11 @@ public class PrincipalActivity extends Activity {
 	String streaming = "";
 	String url_streaming = "";
 	String url_stream = "";
+	
+	/**
+	 * Si la pantalla esta en landscape o portrait.
+	 */
+	private boolean portrait;
 
 
 	/**
@@ -41,8 +46,11 @@ public class PrincipalActivity extends Activity {
 			//Establecer layout segun telefono o tablet.
 			if(getResources().getString(R.string.tipo_pantalla).equals("telefono")){
 				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+				portrait = true;
+				
 			}else{
 				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+				portrait = false;
 			}
 
 			setContentView(R.layout.principal);
@@ -66,7 +74,8 @@ public class PrincipalActivity extends Activity {
 					// Al hacer click en el boton. Llamar a CargaXML y que esta
 					// llame a ListaActivity.
 					if (Utilidades.hayInternet(PrincipalActivity.this, false)) {
-						new CargaXML(PrincipalActivity.this, Utilidades.URL_NOTICIAS)
+						
+						new CargaXML(PrincipalActivity.this, Utilidades.URL_NOTICIAS, portrait)
 								.execute();
 					}
 
@@ -84,7 +93,7 @@ public class PrincipalActivity extends Activity {
 					// Al hacer click en el boton. Llamar a CargaXML y que esta
 					// llame a ListaActivity.
 					if (Utilidades.hayInternet(PrincipalActivity.this, false)) {
-						new CargaXML(PrincipalActivity.this, Utilidades.URL_REPORTAJES)
+						new CargaXML(PrincipalActivity.this, Utilidades.URL_REPORTAJES, portrait)
 								.execute();
 					}
 
@@ -102,7 +111,7 @@ public class PrincipalActivity extends Activity {
 					// Al hacer click en el boton. Llamar a CargaXML y que esta
 					// llame a ListaActivity.
 					if (Utilidades.hayInternet(PrincipalActivity.this, false)) {
-						new CargaXML(PrincipalActivity.this, Utilidades.URL_MAS_DEPORTE)
+						new CargaXML(PrincipalActivity.this, Utilidades.URL_MAS_DEPORTE, portrait)
 								.execute();
 					}
 
@@ -120,7 +129,7 @@ public class PrincipalActivity extends Activity {
 					// Al hacer click en el boton. Llamar a CargaXML y que esta
 					// llame a ListaActivity.
 					if (Utilidades.hayInternet(PrincipalActivity.this, false)) {
-						new CargaXML(PrincipalActivity.this, Utilidades.URL_VIDEOENCUENTRO)
+						new CargaXML(PrincipalActivity.this, Utilidades.URL_VIDEOENCUENTRO, portrait)
 								.execute();
 					}
 
@@ -135,7 +144,7 @@ public class PrincipalActivity extends Activity {
 			botondirecto.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
-					if (streaming.contains("SI")) {
+					if (streaming.contains("NO")) {
 						// Pasarle al videoView la url del streaming.
 						if (Utilidades.hayInternet(PrincipalActivity.this, false)) {
 							Intent in = new Intent(getApplicationContext(),

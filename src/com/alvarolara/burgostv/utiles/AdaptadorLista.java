@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.alvarolara.burgostv.R;
 import com.alvarolara.burgostv.async.CargaXML;
+import com.alvarolara.burgostv.clases.Objeto;
 
 import android.app.Activity;
 import android.content.Context;
@@ -25,7 +26,7 @@ public class AdaptadorLista extends BaseAdapter {
 	/**
 	 * Items del Menu.
 	 */
-	private ArrayList<HashMap<String, String>> menuItems;
+	private ArrayList<Objeto> menuItems;
 	
 	/**
 	 * Inflater.
@@ -43,7 +44,7 @@ public class AdaptadorLista extends BaseAdapter {
 	 * @param actividad
 	 * @param menuItems
 	 */
-	public AdaptadorLista(Activity actividad, ArrayList<HashMap<String, String>> menuItems) {
+	public AdaptadorLista(Activity actividad, ArrayList<Objeto> menuItems) {
 		this.actividad = actividad;
 		this.menuItems = menuItems;
 		inflater = (LayoutInflater) this.actividad
@@ -63,8 +64,8 @@ public class AdaptadorLista extends BaseAdapter {
 	/**
 	 * Devuelve el item del entero que solicitas.
 	 */
-	public Object getItem(int position) {
-		return position;
+	public Object getItem(int posicion) {
+		return menuItems.get(posicion);
 	}
 
 	
@@ -93,20 +94,20 @@ public class AdaptadorLista extends BaseAdapter {
 		TextView url_foto_textview = (TextView) vista
 				.findViewById(R.id.url_foto_textview);
 
-		HashMap<String, String> objeto = new HashMap<String, String>();
+		Objeto objeto = new Objeto();
 		objeto = menuItems.get(position);
 
 		// Colocar los valores en el ListView.
-		titulo.setText(objeto.get(Utilidades.KEY_TITULO));
-		descripcion.setText(objeto.get(Utilidades.KEY_DESCRIPCION));
-		url_video.setText(objeto.get(Utilidades.KEY_URL_VIDEO));
-		fecha.setText(objeto.get(Utilidades.KEY_FECHA));
+		titulo.setText(objeto.getTitulo());
+		descripcion.setText(objeto.getDescripcion());
+		url_video.setText(objeto.getUrl_video());
+		fecha.setText(objeto.getFecha());
 
 		// Cargar la URL para pasarla mediante un Intent.
-		url_foto_textview.setText(objeto.get(Utilidades.KEY_URL_FOTO));
+		url_foto_textview.setText(objeto.getUrl_foto());
 
 		// Dibujar la imagen.
-		cargadorImagenes.muestraImagen(objeto.get(Utilidades.KEY_URL_FOTO), url_foto,
+		cargadorImagenes.muestraImagen(objeto.getUrl_foto(), url_foto,
 				"P");
 		return vista;
 	}

@@ -104,7 +104,7 @@ public class BuscarActivity extends Activity {
 						String URL_BUSQUEDA = Utilidades.URL_BUSCAR + "?busqueda=" + busqueda
 								+ "&tipo=" + tipo;
 	
-						new CargaXML(BuscarActivity.this, URL_BUSQUEDA).execute();
+						new CargaXML(BuscarActivity.this, URL_BUSQUEDA, true).execute();
 						Log.i("cadena de busqueda: ", URL_BUSQUEDA);
 	
 					}

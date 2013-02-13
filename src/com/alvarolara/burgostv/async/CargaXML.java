@@ -3,12 +3,12 @@ package com.alvarolara.burgostv.async;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 import com.alvarolara.burgostv.ErrorActivity;
 import com.alvarolara.burgostv.ListaActivity;
+import com.alvarolara.burgostv.clases.Objeto;
+import com.alvarolara.burgostv.fragment.ObjetoActivity;
 import com.alvarolara.burgostv.utiles.ParseadorXML;
 import com.alvarolara.burgostv.utiles.Utilidades;
 
@@ -22,24 +22,29 @@ import android.util.Log;
 public class CargaXML extends AsyncTask<Void, Void, Void> {
 
 	/**
-	 * ProgressDialog cargando datos.
-	 */
-	private ProgressDialog progress;
-	
-	/**
 	 * Contexto de la Activity.
 	 */
 	private Context contexto;
+	
+	/**
+	 * URL de donde obtener los datos.
+	 */
+	private String URL = "";
+	
+	/**
+	 * Si la pantalla esta en landscape o portrait.
+	 */
+	private boolean portrait;
+	
+	/**
+	 * ProgressDialog cargando datos.
+	 */
+	private ProgressDialog progress;
 
 	/**
 	 * Arraylist para los elementos.
 	 */
-	ArrayList<HashMap<String, String>> menuItems;
-
-	/**
-	 * URL de donde obtener los datos.
-	 */
-	public static String URL = "";
+	ArrayList<Objeto> menuItems;
 
 	/**
 	 * Variable donde se guardara el XML.
@@ -56,9 +61,10 @@ public class CargaXML extends AsyncTask<Void, Void, Void> {
 	 * 
 	 * @param contexto
 	 */
-	public CargaXML(Context contexto, String URL) {
+	public CargaXML(Context contexto, String URL, boolean portrait) {
 		this.contexto = contexto;
 		this.URL = URL;
+		this.portrait = portrait;
 
 		// Preparar el ProgressDialog.
 		progress = new ProgressDialog(contexto);
@@ -82,7 +88,7 @@ public class CargaXML extends AsyncTask<Void, Void, Void> {
 
 		Log.i("doInBackground(): ", "proceso en background");
 
-		menuItems = new ArrayList<HashMap<String, String>>();
+		menuItems = new ArrayList<Objeto>();
 
 		ParseadorXML parser = new ParseadorXML(URL, Utilidades.KEY_ITEM_OBJETO);
 
@@ -96,19 +102,15 @@ public class CargaXML extends AsyncTask<Void, Void, Void> {
 				// Todos los <item>.
 				for (int i = 0; i < parser.getNodeList().getLength(); i++) {
 					Log.i("for: ", "ejecuta el for");
-					// Nuevo HashMap.
-					HashMap<String, String> map = new HashMap<String, String>();
+					
+					//ELemento actual.
 					Element e = (Element) parser.getNodeList().item(i);
-					// Añadir cada nodo hijo al hashmap con clave=> valor.
-					map.put(Utilidades.KEY_TITULO, parser.getValor(e, Utilidades.KEY_TITULO));
-					map.put(Utilidades.KEY_DESCRIPCION,
-							parser.getValor(e, Utilidades.KEY_DESCRIPCION));
-					map.put(Utilidades.KEY_URL_FOTO, parser.getValor(e, Utilidades.KEY_URL_FOTO));
-					map.put(Utilidades.KEY_URL_VIDEO, parser.getValor(e, Utilidades.KEY_URL_VIDEO));
-					map.put(Utilidades.KEY_FECHA, parser.getValor(e, Utilidades.KEY_FECHA));
+					
+					// Nuevo Objeto auxiliar.
+					Objeto aux = new Objeto(parser.getValor(e, Utilidades.KEY_TITULO), parser.getValor(e, Utilidades.KEY_DESCRIPCION), parser.getValor(e, Utilidades.KEY_URL_FOTO), parser.getValor(e, Utilidades.KEY_URL_VIDEO), parser.getValor(e, Utilidades.KEY_FECHA));
 
-					// Añadir el arraylist al hashmap.
-					menuItems.add(map);
+					// Añadir el Objeto al ArrayList.
+					menuItems.add(aux);
 				}
 				Log.i("acaba el for: ", "acaba el for");
 			}
@@ -133,10 +135,19 @@ public class CargaXML extends AsyncTask<Void, Void, Void> {
 
 		if (!error) {
 			// Llamar a la activity.
-			Intent in = new Intent(contexto.getApplicationContext(),
-					ListaActivity.class);
-			in.putExtra("xml", menuItems);
-			contexto.startActivity(in);
+			if(portrait){
+				//Modo vertical
+				Intent in = new Intent(contexto.getApplicationContext(),
+						ListaActivity.class);
+				in.putExtra("xml", menuItems);
+				contexto.startActivity(in);
+			}else{
+				//Modo horizontal.
+				Intent in = new Intent(contexto.getApplicationContext(),
+						ObjetoActivity.class);
+				in.putExtra("xml", menuItems);
+				contexto.startActivity(in);
+			}
 		}
 	}
 }
