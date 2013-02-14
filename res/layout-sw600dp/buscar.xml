@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/degradado_splash"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/degradado_splash" >
 
     <ImageView
         android:layout_width="wrap_content"
@@ -15,7 +15,6 @@
         android:src="@drawable/arriba" />
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -23,7 +22,7 @@
         android:paddingTop="40dp" >
 
         <EditText
-            android:id="@+id/editTextBuscar"
+            android:id="@+id/ETbuscar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -31,27 +30,27 @@
             android:singleLine="true" />
 
         <RadioGroup
-            android:id="@+id/grupoOrdenar"
+            android:id="@+id/RGordenar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal" >
 
             <RadioButton
-                android:id="@+id/radioFecha1"
+                android:id="@+id/RGordenarFecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="fecha" />
 
             <RadioButton
-                android:id="@+id/radioPopularidad2"
+                android:id="@+id/RGordenarPopularidad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="popularidad" />
         </RadioGroup>
 
         <ImageButton
-            android:id="@+id/botonbuscar"
+            android:id="@+id/IBbuscar"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
