@@ -88,7 +88,7 @@ public class VideoActivity extends Activity implements OnCompletionListener,
 
 		VVvideo = (VideoView) findViewById(R.id.VVvideo);
 		VVvideo.setVideoPath(path);
-		IVplay = (ImageView) findViewById(R.id.play);
+		IVplay = (ImageView) findViewById(R.id.IVplay);
 
 		// Duracion Actual y total.
 		TVduracionActual = (TextView) findViewById(R.id.TVduracionActual);
