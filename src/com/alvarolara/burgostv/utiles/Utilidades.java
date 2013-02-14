@@ -7,6 +7,11 @@ import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.Toast;
 
+/**
+ * Utilidades Varias.
+ * @author Alvaro Lara Cano
+ *
+ */
 public class Utilidades {
 	
 	/**

@@ -1,8 +1,5 @@
 package com.alvarolara.burgostv.fragment;
 
-import java.io.File;
-import java.net.URI;
-
 import com.alvarolara.burgostv.R;
 import com.alvarolara.burgostv.VideoActivity;
 import com.alvarolara.burgostv.utiles.CargadorImagenes;
@@ -10,39 +7,42 @@ import com.alvarolara.burgostv.utiles.Utilidades;
 
 import android.support.v4.app.Fragment;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
  * 
- * Fragment que define el comportamiento del detalle de la lista una vez se
- * selecciona un elemento en otro Fragment
+ * Fragment para ver un objeto seleccionado de la lista.
+ * @author Alvaro Lara Cano
  * 
  */
 public class ObjetoDetalleFragment extends Fragment {
+	
+	/**
+	 * Cuando se crea la actividad.
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	}
 
+	/**
+	 * Cuando se crea la actividad.
+	 */
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
 	}
 
+	/**
+	 * Al crearse la vista.
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -84,6 +84,11 @@ public class ObjetoDetalleFragment extends Fragment {
 		
 	}
 	
+	/**
+	 * Establece el clickLIstener a la imagen.
+	 * @param actividad
+	 * @param url_video
+	 */
 	public void setOnClickListenerImagen(final Activity actividad, final String url_video){
 		//Evento en el reproductor.
 		ImageView lblUrl_foto = (ImageView) getView().findViewById(R.id.url_foto);

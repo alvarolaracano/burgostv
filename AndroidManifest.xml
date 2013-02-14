@@ -10,7 +10,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.alvarolara.burgostv.PrincipalActivity" android:screenOrientation="portrait">
+        <activity android:name="com.alvarolara.burgostv.PrincipalActivity" >
             <intent-filter>
                 <action android:name="com.alvarolara.burgostv.PrincipalActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -25,13 +25,13 @@
         </activity>
         <activity android:name="com.alvarolara.burgostv.ListaActivity" android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="com.alvarolara.burgostv.ObjetosActivity" />
+                <action android:name="com.alvarolara.burgostv.ListaActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>    
         </activity>
         <activity android:name="com.alvarolara.burgostv.ObjetoActivity" android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="com.alvarolara.burgostv.UnObjetoActivity" />
+                <action android:name="com.alvarolara.burgostv.ObjetoActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <!-- Lo abrimos cuando llegue un enlace de la URL noticias, reportajes, mas deporte o burgos en persona -->   
@@ -45,15 +45,9 @@
 			 <data android:scheme="http" android:host="www.burgostv.es" android:pathPattern="/burgos-en-persona/.*" />
 			</intent-filter>
         </activity>
-        <activity android:name="com.alvarolara.burgostv.BuscarActivity" android:screenOrientation="portrait">
+        <activity android:name="com.alvarolara.burgostv.BuscarActivity" >
             <intent-filter>
                 <action android:name="com.alvarolara.burgostv.BuscarActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>    
-        </activity>
-        <activity android:name="com.alvarolara.burgostv.BusquedaActivity" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.alvarolara.burgostv.BusquedaActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>    
         </activity>
@@ -69,7 +63,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>    
         </activity>
-        <activity android:name="com.alvarolara.burgostv.ErrorActivity" android:screenOrientation="portrait">
+        <activity android:name="com.alvarolara.burgostv.ErrorActivity" >
             <intent-filter>
                 <action android:name="com.alvarolara.burgostv.ErrorActivity" />
                 <category android:name="android.intent.category.DEFAULT" />

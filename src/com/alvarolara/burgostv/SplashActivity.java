@@ -9,6 +9,11 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.Window;
 
+/**
+ * Splash con el logo de la aplicacion.
+ * @author Alvaro Lara Cano
+ *
+ */
 public class SplashActivity extends Activity {
 
 	/**

@@ -22,6 +22,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 
+/**
+ * Carga las imagenes.
+ * @author Alvaro Lara Cano
+ *
+ */
 public class CargadorImagenes {
 
 	/**

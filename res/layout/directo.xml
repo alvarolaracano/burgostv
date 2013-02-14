@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    	android:id="@+id/contenedorVideoview"
         android:orientation="vertical" 
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
@@ -12,7 +11,7 @@
 	    android:layout_centerVertical="true">
 	    
 		    <VideoView
-		        android:id="@+id/video"
+		        android:id="@+id/VVdirecto"
 		        android:layout_gravity="center"
 		        android:layout_width="fill_parent"
 		        android:layout_height="fill_parent" />
@@ -20,7 +19,7 @@
 		    <!-- Boton de Play, por defecto oculto -->
 		    
 		    <ImageView
-		        android:id="@+id/play"
+		        android:id="@+id/IVplay"
 		        android:layout_width="match_parent"
 		        android:layout_height="match_parent"
 		        android:src="@drawable/play_video"
@@ -28,7 +27,6 @@
 	
 		</RelativeLayout>
 	    <ImageView
-	        android:id="@+id/logovideo"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentRight="true"

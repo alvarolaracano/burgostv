@@ -7,42 +7,37 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.MediaController;
-import android.widget.SeekBar;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
 
+/**
+ * Visualiza streaming e directo.
+ * @author Alvaro Lara Cano
+ *
+ */
 public class DirectoActivity extends Activity implements OnCompletionListener {
 
 	/**
 	 * Videoview para reproducir el video.
 	 */
-	private VideoView video;
+	private VideoView VVdirecto;
 	
 	/**
 	 * Controlador multimedia.
 	 */
-	private MediaController ctlr;
+	private MediaController controlador;
 	
 	/**
 	 * ImageView para el play.
 	 */
-	private ImageView play;
+	private ImageView IVplay;
 	
-	/**
-	 * Manejador para actualizar el seekbar.
-	 */
-	private Handler mHandler = new Handler();
 
 	
 	/**
@@ -62,7 +57,7 @@ public class DirectoActivity extends Activity implements OnCompletionListener {
 		Intent in = getIntent();
 		String path = in.getStringExtra(Utilidades.KEY_URL_STREAMING);
 
-		video = (VideoView) findViewById(R.id.video);
+		VVdirecto = (VideoView) findViewById(R.id.VVdirecto);
 		
 		//path =  "rtsp://188.40.15.22/webcam/webcam1";
 		path = "rtsp://188.40.15.22:1935/programado/burgosTV";
@@ -71,28 +66,28 @@ public class DirectoActivity extends Activity implements OnCompletionListener {
 		//path = "rtsp://184.72.239.149/vod/mp4:BigBuckBunny_175k.mov";
 		Log.i("url directo: ",convierteaRSTP(path));
 		//video.setVideoURI(Uri.parse(convierteaRSTP(path)));
-		video.setVideoPath(convierteaRSTP(path));
+		VVdirecto.setVideoPath(convierteaRSTP(path));
 
-		play = (ImageView) findViewById(R.id.play);
+		IVplay = (ImageView) findViewById(R.id.IVplay);
 
-		video.setMediaController(ctlr);
-		video.requestFocus();
-		video.start();
-		video.setOnCompletionListener(this);
+		VVdirecto.setMediaController(controlador);
+		VVdirecto.requestFocus();
+		VVdirecto.start();
+		VVdirecto.setOnCompletionListener(this);
 
 		// Evento play/pause.
-		video.setOnTouchListener(new View.OnTouchListener() {
+		VVdirecto.setOnTouchListener(new View.OnTouchListener() {
 
 			public boolean onTouch(View v, MotionEvent event) {
 
-				if (video.isPlaying()) {
-					video.pause();
+				if (VVdirecto.isPlaying()) {
+					VVdirecto.pause();
 					// Mostrar el boton de play.
-					play.setVisibility(View.VISIBLE);
+					IVplay.setVisibility(View.VISIBLE);
 				} else {
-					video.start();
+					VVdirecto.start();
 					// Ocultar boton de play.
-					play.setVisibility(View.GONE);
+					IVplay.setVisibility(View.GONE);
 				}
 
 				return false;
@@ -102,7 +97,7 @@ public class DirectoActivity extends Activity implements OnCompletionListener {
 	}
 
 	/**
-	 * Cuando acabe de reproducir, finaliza el Activity.
+	 * Cuando acaba de reproducir, finaliza el Activity.
 	 */
 	public void onCompletion(MediaPlayer mp) {
 		finish();

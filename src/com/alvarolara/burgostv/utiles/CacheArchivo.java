@@ -3,8 +3,16 @@ package com.alvarolara.burgostv.utiles;
 import java.io.File;
 import android.content.Context;
 
+/**
+ * Crea la cahe de archivo.
+ * @author Alvaro Lara Cano
+ *
+ */
 public class CacheArchivo {
 
+	/**
+	 * Fichero para el cache.
+	 */
 	private File directorioCache;
 
 	/**

@@ -2,18 +2,60 @@ package com.alvarolara.burgostv.clases;
 
 import java.io.Serializable;
 
+/**
+ * Objeto generico para mapear los recibidos por HTTP.
+ * Noticia, Reportaje, Magazine...
+ * @author Alvaro Lara Cano
+ *
+ */
 public class Objeto implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Titulo.
+	 */
 	private String titulo;
 	
+	/**
+	 * Descripcion.
+	 */
 	private String descripcion;
 	
+	/**
+	 * Url_foto.
+	 */
 	private String url_foto;
 	
+	/**
+	 * Url_video.
+	 */
 	private String url_video;
 	
+	/**
+	 * Fecha.
+	 */
 	private String fecha;
 	
+	
+	/**
+	 * COnstructor vacio.
+	 */
+	public Objeto(){
+		
+	}
+	
+	
+	/**
+	 * Constructor sin fecha.
+	 * @param titulo
+	 * @param descripcion
+	 * @param url_foto
+	 * @param url_video
+	 */
 	public Objeto(String titulo, String descripcion, String url_foto, String url_video){
 		this.titulo =  titulo;
 		this.descripcion =  descripcion;
@@ -21,6 +63,14 @@ public class Objeto implements Serializable{
 		this.url_video = url_video;
 	}
 	
+	/**
+	 * Constructor con fecha.
+	 * @param titulo
+	 * @param descripcion
+	 * @param url_foto
+	 * @param url_video
+	 * @param fecha
+	 */
 	public Objeto(String titulo, String descripcion, String url_foto, String url_video, String fecha){
 		this.titulo =  titulo;
 		this.descripcion =  descripcion;
@@ -29,9 +79,6 @@ public class Objeto implements Serializable{
 		this.fecha = fecha;
 	}
 	
-	public Objeto(){
-		
-	}
 
 	/**
 	 * Devuelve el titulo.

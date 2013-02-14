@@ -4,6 +4,11 @@ import android.graphics.Paint;
 import android.view.Gravity;
 import android.widget.TextView;
 
+/**
+ * JUstifica el texto de un TextView.
+ * @author Alvaro Lara Cano
+ *
+ */
 public class JustificaTexto {
 
 	final static String SYSTEM_NEWLINE = "\n";

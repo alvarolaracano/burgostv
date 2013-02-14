@@ -1,23 +1,21 @@
 package com.alvarolara.burgostv.fragment;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.alvarolara.burgostv.R;
-import com.alvarolara.burgostv.VideoActivity;
 import com.alvarolara.burgostv.clases.Objeto;
 import com.alvarolara.burgostv.utiles.AdaptadorLista;
-import com.alvarolara.burgostv.utiles.Utilidades;
 
 import android.support.v4.app.FragmentActivity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.view.Window;
-import android.widget.ImageView;
 import android.widget.ListView;
 
+/**
+ * Fragment que agrupa Lista y Detalle.
+ * @author Alvaro Lara Cano
+ *
+ */
 public class ObjetoActivity extends FragmentActivity {
 	
 	/**
@@ -35,6 +33,7 @@ public class ObjetoActivity extends FragmentActivity {
 	 */
 	AdaptadorLista adaptador;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,9 +53,9 @@ public class ObjetoActivity extends FragmentActivity {
 		
 		
 		ObjetoListaFragment fragment = (ObjetoListaFragment)getSupportFragmentManager().findFragmentById(R.id.Flista); 
+		//Establecer el contexto y el adaptador.
 		fragment.setContexto(this);
 		fragment.setListAdapter(adaptador);
-		
-		
+
 	}
 }

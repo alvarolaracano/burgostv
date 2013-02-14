@@ -16,6 +16,11 @@ import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+/**
+ * Menu principal con las diferentes opciones.
+ * @author Alvaro Lara Cano
+ *
+ */
 public class PrincipalActivity extends Activity {
 	
 

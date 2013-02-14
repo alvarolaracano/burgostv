@@ -1,9 +1,7 @@
 package com.alvarolara.burgostv;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import com.alvarolara.burgostv.async.CargaXML;
 import com.alvarolara.burgostv.clases.Objeto;
 import com.alvarolara.burgostv.utiles.AdaptadorLista;
 import com.alvarolara.burgostv.utiles.Utilidades;
@@ -16,10 +14,14 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
+/**
+ * Listado con los objetos.
+ * @author Alvaro Lara Cano
+ *
+ */
 public class ListaActivity extends ListActivity {
 
 	/**

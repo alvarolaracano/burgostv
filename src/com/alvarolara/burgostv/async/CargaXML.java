@@ -1,7 +1,6 @@
 package com.alvarolara.burgostv.async;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.w3c.dom.Element;
 
@@ -19,6 +18,11 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
+/**
+ * AsynTask para parsear el XML.
+ * @author Alvaro Lara Cano
+ *
+ */
 public class CargaXML extends AsyncTask<Void, Void, Void> {
 
 	/**

@@ -6,6 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 import android.graphics.Bitmap;
 
+/**
+ * Crea la cache de memoria.
+ * @author Alvaro Lara Cano
+ *
+ */
 public class CacheMemoria {
 	
 	/**

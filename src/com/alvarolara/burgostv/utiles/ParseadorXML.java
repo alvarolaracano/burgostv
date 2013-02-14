@@ -23,6 +23,11 @@ import org.xml.sax.SAXException;
 
 import android.util.Log;
 
+/**
+ * Parsea un XML.
+ * @author Alvaro Lara Cano
+ *
+ */
 public class ParseadorXML {
 	
 	/**

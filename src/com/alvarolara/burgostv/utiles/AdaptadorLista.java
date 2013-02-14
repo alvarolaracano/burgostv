@@ -1,10 +1,8 @@
 package com.alvarolara.burgostv.utiles;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.alvarolara.burgostv.R;
-import com.alvarolara.burgostv.async.CargaXML;
 import com.alvarolara.burgostv.clases.Objeto;
 
 import android.app.Activity;
@@ -16,6 +14,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * Adaptador para cargar la lista de objetos.
+ * @author Alvaro Lara Cano
+ *
+ */
 public class AdaptadorLista extends BaseAdapter {
 
 	/**
@@ -40,7 +43,7 @@ public class AdaptadorLista extends BaseAdapter {
 
 	
 	/**
-	 * 
+	 * Constructor.
 	 * @param actividad
 	 * @param menuItems
 	 */

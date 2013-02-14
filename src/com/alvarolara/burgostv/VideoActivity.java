@@ -11,83 +11,115 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
 
+/**
+ * Visualiza un objeto descargado por HTTP.
+ * @author Alvaro Lara Cano
+ *
+ */
 public class VideoActivity extends Activity implements OnCompletionListener,
 		SeekBar.OnSeekBarChangeListener {
 
-	private VideoView video;
-	private MediaController ctlr;
-	private SeekBar seek;
-	private TextView actual;
-	private TextView total;
-	private ImageView play;
-	static final String KEY_URL_VIDEO = "url_video";
+	/**
+	 * Videoview para visualizar el video.
+	 */
+	private VideoView VVvideo;
+	
+	/**
+	 * Controlador multimedia.
+	 */
+	private MediaController controlador;
+	
+	/**
+	 * Barra de progreso.
+	 */
+	private SeekBar SBbarraProgreso;
+	
+	/**
+	 * TextView para tiempo transcurrido. 
+	 */
+	private TextView TVduracionActual;
+	
+	/**
+	 * TextView para tiempo total.
+	 */
+	private TextView TVduracionTotal;
+	
+	/**
+	 * ImageView play.
+	 */
+	private ImageView IVplay;
+	
+	/**
+	 * Manejador para actualizar el seekbar.
+	 */
+	private Handler manejador = new Handler();
+	
+	/**
+	 * Utilidades.
+	 */
+	private Utilidades utilidades;
+	
 
-	// Manejador para actualizar el seekbar.
-	private Handler mHandler = new Handler();
-	private Utilidades utils;
-
+	/**
+	 * Llamado cuando la Actividad es creada.
+	 */
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		getWindow().setFormat(PixelFormat.TRANSLUCENT);
 		setContentView(R.layout.video);
+		
 		// No apagar la pantalla.
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 		// Instanciar Utilidades.
-		utils = new Utilidades();
+		utilidades = new Utilidades();
 
 		// Recoger la URl a través del intent.
 		Intent in = getIntent();
-		String path = in.getStringExtra(KEY_URL_VIDEO);
+		String path = in.getStringExtra(Utilidades.KEY_URL_VIDEO);
 
-		video = (VideoView) findViewById(R.id.video);
-		video.setVideoPath(path);
-		play = (ImageView) findViewById(R.id.play);
+		VVvideo = (VideoView) findViewById(R.id.VVvideo);
+		VVvideo.setVideoPath(path);
+		IVplay = (ImageView) findViewById(R.id.play);
 
 		// Duracion Actual y total.
-		actual = (TextView) findViewById(R.id.duracionActual);
-		total = (TextView) findViewById(R.id.duracionTotal);
+		TVduracionActual = (TextView) findViewById(R.id.TVduracionActual);
+		TVduracionTotal = (TextView) findViewById(R.id.TVduracionTotal);
 
 		// Mi seekbar personalizado.
-		seek = (SeekBar) findViewById(R.id.seekBar);
-		seek.setProgress(0);
-		seek.setMax(100);
-		seek.setOnSeekBarChangeListener(this);
+		SBbarraProgreso = (SeekBar) findViewById(R.id.SBbarraProgreso);
+		SBbarraProgreso.setProgress(0);
+		SBbarraProgreso.setMax(100);
+		SBbarraProgreso.setOnSeekBarChangeListener(this);
 
-		video.setMediaController(ctlr);
-		video.requestFocus();
-		video.start();
-		video.setOnCompletionListener(this);
+		VVvideo.setMediaController(controlador);
+		VVvideo.requestFocus();
+		VVvideo.start();
+		VVvideo.setOnCompletionListener(this);
 		updateProgressBar();
 
 		// Evento play/pause.
-		video.setOnTouchListener(new View.OnTouchListener() {
+		VVvideo.setOnTouchListener(new View.OnTouchListener() {
 
 			public boolean onTouch(View v, MotionEvent event) {
 
-				if (video.isPlaying()) {
-					video.pause();
-					// Toast.makeText(v.getContext(), "pausa",
-					// Toast.LENGTH_LONG).show();
+				if (VVvideo.isPlaying()) {
+					VVvideo.pause();
 					// Mostrar el boton de play.
-					play.setVisibility(View.VISIBLE);
+					IVplay.setVisibility(View.VISIBLE);
 					updateProgressBar();
 				} else {
-					video.start();
-					// Toast.makeText(v.getContext(), "play",
-					// Toast.LENGTH_LONG).show();
+					VVvideo.start();
 					// Ocultar boton de play.
-					play.setVisibility(View.GONE);
+					IVplay.setVisibility(View.GONE);
 					updateProgressBar();
 				}
 
@@ -96,21 +128,24 @@ public class VideoActivity extends Activity implements OnCompletionListener,
 		});
 
 	}
-
+	
+	
+	/**
+	 * Cuando acaba de reproducir, finaliza el Activity.
+	 */
 	public void onCompletion(MediaPlayer mp) {
-		// Cuando acabe de reproducir, finaliza el Activity.
 		finish();
 	}
 
+	
 	public void onProgressChanged(SeekBar seekBar, int progress,
 			boolean fromUser) {
-		// Actualizar el video con la posicion del seek.
+		
 
 	}
 
 	public void onStartTrackingTouch(SeekBar seekBar) {
-		// TODO Auto-generated method stub
-		mHandler.removeCallbacks(mUpdateTimeTask);
+		manejador.removeCallbacks(mUpdateTimeTask);
 	}
 
 	/**
@@ -118,34 +153,19 @@ public class VideoActivity extends Activity implements OnCompletionListener,
 	 */
 	public void onStopTrackingTouch(SeekBar seekBar) {
 
-		mHandler.removeCallbacks(mUpdateTimeTask);
+		manejador.removeCallbacks(mUpdateTimeTask);
 
-		int duracionTotal = video.getDuration();
-		int posicionActual = utils.progresoATimer(seekBar.getProgress(),
+		int duracionTotal = VVvideo.getDuration();
+		int posicionActual = utilidades.progresoATimer(seekBar.getProgress(),
 				duracionTotal);
-
-		int posicionBuffer = seek.getSecondaryProgress();
 
 		// Si la posicion del seek es > del 15 % del buffer, mantenemos donde
 		// estaba.
 
-		int posicion = (posicionActual * 100) / duracionTotal;
-
-		// Toast.makeText(getApplicationContext(),
-		// "posicion: "+posicion+" => buffer "+posicionBuffer,
-		// Toast.LENGTH_LONG).show();
-
 		// posicionbuffer-15 para un rango.
-		if (posicion < posicionBuffer) {
+		if (((posicionActual * 100) / duracionTotal) < SBbarraProgreso.getSecondaryProgress()) {
 			// Movernos a la posicionActual.
-
-			// Toast.makeText(getApplicationContext(), "SI mueve posicion",
-			// Toast.LENGTH_LONG).show();
-			video.seekTo(posicionActual);
-
-		} else {
-			// Toast.makeText(getApplicationContext(), "NO mueve posicion",
-			// Toast.LENGTH_LONG).show();
+			VVvideo.seekTo(posicionActual);
 		}
 
 		// Actualizar el timmer.
@@ -156,39 +176,43 @@ public class VideoActivity extends Activity implements OnCompletionListener,
 	 * Actualizar la seek bar.
 	 */
 	public void updateProgressBar() {
-		mHandler.postDelayed(mUpdateTimeTask, 100);
+		manejador.postDelayed(mUpdateTimeTask, 100);
 	}
 
+	/**
+	 * Runnable la duracion actual/total.
+	 */
 	private Runnable mUpdateTimeTask = new Runnable() {
 		public void run() {
 
-			long duracionTotal = video.getDuration();
-			long duracionActual = video.getCurrentPosition();
+			long duracionTotal = VVvideo.getDuration();
+			long duracionActual = VVvideo.getCurrentPosition();
 
-			// Mostar el tiempo total.
-			total.setText("" + utils.milisegundosATimer(duracionTotal));
+			// Mostar la duracion total.
+			TVduracionTotal.setText("" + utilidades.milisegundosATimer(duracionTotal));
 
-			// Mostar el tiempo actual. Si no tiene un 00, añadir un espacio.
-			if (utils.milisegundosATimer(duracionActual).toString().length() == 4) {
-				actual.setText(" " + utils.milisegundosATimer(duracionActual)
+			// Mostar la duracion actual. Si no tiene un 00, añadir un espacio.
+			if (utilidades.milisegundosATimer(duracionActual).toString().length() == 4) {
+				TVduracionActual.setText(" " + utilidades.milisegundosATimer(duracionActual)
 						+ " /");
 			} else {
-				actual.setText("" + utils.milisegundosATimer(duracionActual)
+				TVduracionActual.setText("" + utilidades.milisegundosATimer(duracionActual)
 						+ " /");
 			}
 
-			// Updating progress bar
-			int progress = (int) (utils.porcentajeProgreso(duracionActual,
+			// Actualizar la barra de progreso.
+			int progress = (int) (utilidades.porcentajeProgreso(duracionActual,
 					duracionTotal));
 
-			seek.setProgress(progress);
+			SBbarraProgreso.setProgress(progress);
 
-			int descargado = video.getBufferPercentage();
+			//Porcentaje descargado.
+			int descargado = VVvideo.getBufferPercentage();
 
-			seek.setSecondaryProgress(descargado);
+			SBbarraProgreso.setSecondaryProgress(descargado);
 
 			// Ejecutar este Thread despues de 100ms.
-			mHandler.postDelayed(this, 100);
+			manejador.postDelayed(this, 100);
 		}
 	};
 }

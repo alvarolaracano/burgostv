@@ -18,6 +18,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+/**
+ * Busca objetos por peticion HTTP.
+ * @author Alvaro Lara Cano
+ *
+ */
 public class BuscarActivity extends Activity {
 
 	/**
@@ -51,9 +56,9 @@ public class BuscarActivity extends Activity {
 		setContentView(R.layout.buscar);
 
 		// Foco en el edittext.
-		EditText editTextBuscar = (EditText) findViewById(R.id.editTextBuscar);
-		editTextBuscar.setFocusable(true);
-		editTextBuscar.requestFocus();
+		EditText ETbuscar = (EditText) findViewById(R.id.ETbuscar);
+		ETbuscar.setFocusable(true);
+		ETbuscar.requestFocus();
 
 		// Forzar el teclado a aparecer.
 		this.getWindow()
@@ -85,24 +90,24 @@ public class BuscarActivity extends Activity {
 				});
 
 		// Eventlistener para el boton.
-		ImageButton botonBuscar = (ImageButton) findViewById(R.id.botonbuscar);
+		ImageButton IBbuscar = (ImageButton) findViewById(R.id.IBbuscar);
 
-		botonBuscar.setOnClickListener(new OnClickListener() {
+		IBbuscar.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
 				// Al hacer click en el boton.
 				if (Utilidades.hayInternet(BuscarActivity.this, false)) {
 					// Obtener el tipo para enviarlo al Intent.
 					String tipo = "1";
-					if (grupoOrdenar.getCheckedRadioButtonId() == R.id.radioFecha1) {
+					if (grupoOrdenar.getCheckedRadioButtonId() == R.id.RGordenarFecha) {
 						tipo = "1";
-						// Log.i("checkbox1", "tipo=1");
-					} else if (grupoOrdenar.getCheckedRadioButtonId() == R.id.radioPopularidad2) {
+						Log.i("checkbox", "fecha");
+					} else if (grupoOrdenar.getCheckedRadioButtonId() == R.id.RGordenarPopularidad) {
 						tipo = "2";
-						// Log.i("checkbox2", "tipo=2");
+						Log.i("checkbox", "popularidad");
 					}
 	
-					EditText editTextBuscar = (EditText) findViewById(R.id.editTextBuscar);
+					EditText editTextBuscar = (EditText) findViewById(R.id.ETbuscar);
 					busqueda = editTextBuscar.getText().toString();
 	
 					if (busqueda.length() < 2) {

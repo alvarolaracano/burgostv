@@ -5,6 +5,11 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Window;
 
+/**
+ * Muestra un mensaje de error.
+ * @author Alvaro Lara Cano
+ *
+ */
 public class ErrorActivity extends Activity {
 
 	/**

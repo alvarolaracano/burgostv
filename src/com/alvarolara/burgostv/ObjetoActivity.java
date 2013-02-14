@@ -17,6 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
 
+/**
+ * Visualiza un objeto y su descripcion.
+ * @author Alvaro Lara Cano
+ *
+ */
 public class ObjetoActivity extends Activity {
 
 	/**
