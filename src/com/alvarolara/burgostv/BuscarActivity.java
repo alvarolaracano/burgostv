@@ -66,25 +66,25 @@ public class BuscarActivity extends Activity {
 
 		// Seleccionar por defecto el fecha y si cambia, desmarcar el otro.
 
-		final RadioGroup grupoOrdenar = (RadioGroup) findViewById(R.id.grupoOrdenar);
-		grupoOrdenar.check(R.id.radioFecha1);
+		final RadioGroup RGordenar = (RadioGroup) findViewById(R.id.RGordenar);
+		RGordenar.check(R.id.RGordenarFecha);
 
 		// Obtener los radiobuttons.
-		final RadioButton radioFecha1 = (RadioButton) findViewById(R.id.radioFecha1);
-		final RadioButton radioPopularidad2 = (RadioButton) findViewById(R.id.radioPopularidad2);
+		final RadioButton RGordenarFecha = (RadioButton) findViewById(R.id.RGordenarFecha);
+		final RadioButton RGordenarPopularidad = (RadioButton) findViewById(R.id.RGordenarPopularidad);
 
-		grupoOrdenar
+		RGordenar
 				.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
 					public void onCheckedChanged(RadioGroup group, int checkedId) {
 						// TODO Auto-generated method stub
-						if (radioFecha1.isChecked()) {
-							radioFecha1.setChecked(false);
-							radioPopularidad2.setChecked(true);
+						if (RGordenarFecha.isChecked()) {
+							RGordenarFecha.setChecked(false);
+							RGordenarPopularidad.setChecked(true);
 
-						} else if (radioPopularidad2.isChecked()) {
-							radioPopularidad2.setChecked(false);
-							radioFecha1.setChecked(true);
+						} else if (RGordenarPopularidad.isChecked()) {
+							RGordenarPopularidad.setChecked(false);
+							RGordenarFecha.setChecked(true);
 						}
 					}
 				});
@@ -99,16 +99,16 @@ public class BuscarActivity extends Activity {
 				if (Utilidades.hayInternet(BuscarActivity.this, false)) {
 					// Obtener el tipo para enviarlo al Intent.
 					String tipo = "1";
-					if (grupoOrdenar.getCheckedRadioButtonId() == R.id.RGordenarFecha) {
+					if (RGordenar.getCheckedRadioButtonId() == R.id.RGordenarFecha) {
 						tipo = "1";
 						Log.i("checkbox", "fecha");
-					} else if (grupoOrdenar.getCheckedRadioButtonId() == R.id.RGordenarPopularidad) {
+					} else if (RGordenar.getCheckedRadioButtonId() == R.id.RGordenarPopularidad) {
 						tipo = "2";
 						Log.i("checkbox", "popularidad");
 					}
 	
-					EditText editTextBuscar = (EditText) findViewById(R.id.ETbuscar);
-					busqueda = editTextBuscar.getText().toString();
+					EditText ETbuscar = (EditText) findViewById(R.id.ETbuscar);
+					busqueda = ETbuscar.getText().toString();
 	
 					if (busqueda.length() < 2) {
 	

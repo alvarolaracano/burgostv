@@ -149,7 +149,7 @@ public class PrincipalActivity extends Activity {
 			botondirecto.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
-					if (streaming.contains("NO")) {
+					if (streaming.contains("SI")) {
 						// Pasarle al videoView la url del streaming.
 						if (Utilidades.hayInternet(PrincipalActivity.this, false)) {
 							Intent in = new Intent(getApplicationContext(),
