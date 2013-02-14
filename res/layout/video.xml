@@ -66,8 +66,8 @@
 		        android:layout_height="wrap_content"
 		        android:paddingLeft="6dp"
 		        android:paddingRight="6dp"
-		        android:progressDrawable="@drawable/seekbar_progress_xml"
-		        android:thumb="@drawable/seek_handler" />
+		        android:progressDrawable="@drawable/seekbar_progreso"
+		        android:thumb="@drawable/seekbar_manejador" />
 		</LinearLayout>
 	
 </RelativeLayout>

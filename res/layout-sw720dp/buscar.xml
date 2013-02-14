@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/degradado_splash"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="5dp"
+        android:src="@drawable/arriba" />
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingTop="80dp" >
+
+        <EditText
+            android:id="@+id/editTextBuscar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="20"
+            android:singleLine="true" />
+
+        <RadioGroup
+            android:id="@+id/grupoOrdenar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radioFecha1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="fecha" />
+
+            <RadioButton
+                android:id="@+id/radioPopularidad2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="popularidad" />
+        </RadioGroup>
+
+        <ImageButton
+            android:id="@+id/botonbuscar"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/boton_buscar"
+            android:focusable="true"
+            android:gravity="center_horizontal" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -3,7 +3,7 @@
     <item>
         <clip>
         <bitmap xmlns:android="http://schemas.android.com/apk/res/android"
-            android:src="@drawable/seekbar_progress"
+            android:src="@drawable/seekbar_progreso_primario"
             android:tileMode="repeat"
             android:antialias="true"
             android:dither="false"

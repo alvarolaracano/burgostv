@@ -52,18 +52,13 @@ public class VideoActivity extends Activity implements OnCompletionListener,
 
 		video = (VideoView) findViewById(R.id.video);
 		video.setVideoPath(path);
-
-		// Controles de reproducción antiguos.
-		/*
-		 * ctlr = new MediaController(this); ctlr.setMediaPlayer(video);
-		 */
 		play = (ImageView) findViewById(R.id.play);
 
-		// duracion Actual y total.
+		// Duracion Actual y total.
 		actual = (TextView) findViewById(R.id.duracionActual);
 		total = (TextView) findViewById(R.id.duracionTotal);
 
-		// Mi seekbar
+		// Mi seekbar personalizado.
 		seek = (SeekBar) findViewById(R.id.seekBar);
 		seek.setProgress(0);
 		seek.setMax(100);

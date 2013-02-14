@@ -4,6 +4,7 @@ import com.alvarolara.burgostv.async.CargaXML;
 import com.alvarolara.burgostv.utiles.Utilidades;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,10 @@ public class BuscarActivity extends Activity {
 	 */
 	private String busqueda = "";
 
+	/**
+	 * Si la pantalla esta en landscape o portrait.
+	 */
+	private boolean portrait;
 	
 	/**
 	 * Llamado cuando la Actividad es creada.
@@ -32,6 +37,17 @@ public class BuscarActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
+		//Establecer layout segun telefono o tablet.
+		if(getResources().getString(R.string.tipo_pantalla).equals("telefono")){
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+			portrait = true;
+			
+		}else{
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+			portrait = false;
+		}
+
 		setContentView(R.layout.buscar);
 
 		// Foco en el edittext.
@@ -103,9 +119,10 @@ public class BuscarActivity extends Activity {
 						// Formar la cadena de busqueda completa.
 						String URL_BUSQUEDA = Utilidades.URL_BUSCAR + "?busqueda=" + busqueda
 								+ "&tipo=" + tipo;
-	
-						new CargaXML(BuscarActivity.this, URL_BUSQUEDA, true).execute();
-						Log.i("cadena de busqueda: ", URL_BUSQUEDA);
+						if (Utilidades.hayInternet(BuscarActivity.this, false)) {
+							new CargaXML(BuscarActivity.this, URL_BUSQUEDA, portrait).execute();
+							Log.i("cadena de busqueda: ", URL_BUSQUEDA);
+						}
 	
 					}
 				}
