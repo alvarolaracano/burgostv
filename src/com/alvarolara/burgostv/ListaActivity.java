@@ -1,5 +1,6 @@
 package com.alvarolara.burgostv;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import com.alvarolara.burgostv.clases.Objeto;
@@ -9,6 +10,10 @@ import com.alvarolara.burgostv.R;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -88,9 +93,13 @@ public class ListaActivity extends ListActivity {
 					String TVurl_video = ((TextView) view.findViewById(R.id.TVurl_video)).getText().toString();
 					in.putExtra(Utilidades.KEY_URL_VIDEO, TVurl_video);
 					
+					
+					
+					
 					//Imagencorrecta.
 					String TVimagenCorrecta = ((TextView) view.findViewById(R.id.TVimagenCorrecta)).getText().toString();
-					in.putExtra("imagencorrecta", TVimagenCorrecta);
+					in.putExtra("cargando", "SI");
+					
 					
 					//Comenzar la actividad.
 					startActivity(in);
@@ -98,6 +107,30 @@ public class ListaActivity extends ListActivity {
 			}
 		});
 
+	}
+	
+	public boolean comparaDrawable(Drawable d1, Drawable d2){
+	    try{
+	        Bitmap bitmap1 = ((BitmapDrawable)d1).getBitmap();
+	        ByteArrayOutputStream stream1 = new ByteArrayOutputStream();
+	        bitmap1.compress(Bitmap.CompressFormat.JPEG, 100, stream1);
+	        stream1.flush();
+	        byte[] bitmapdata1 = stream1.toByteArray();
+	        stream1.close();
+
+	        Bitmap bitmap2 = ((BitmapDrawable)d2).getBitmap();
+	        ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
+	        bitmap2.compress(Bitmap.CompressFormat.JPEG, 100, stream2);
+	        stream2.flush();
+	        byte[] bitmapdata2 = stream2.toByteArray();
+	        stream2.close();
+
+	        return bitmapdata1.equals(bitmapdata2);
+	    }
+	    catch (Exception e) {
+	        // TODO: handle exception
+	    }
+	    return false;
 	}
 
 }

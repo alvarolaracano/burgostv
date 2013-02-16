@@ -33,12 +33,12 @@ public class CargadorImagenes {
 	/**
 	 * Caché de memoria.
 	 */
-	CacheMemoria cacheMemoria = new CacheMemoria();
+	private CacheMemoria cacheMemoria = new CacheMemoria();
 	
 	/**
 	 * Cache de Archivo.
 	 */
-	CacheArchivo cacheArchivo;
+	private CacheArchivo cacheArchivo;
 	
 	/**
 	 * Coleccion de ImageViews.
@@ -49,12 +49,13 @@ public class CargadorImagenes {
 	/**
 	 * Servicio Ejecutor.
 	 */
-	ExecutorService executorService;
+	private ExecutorService executorService;
 
 	/**
 	 * Tamano de escalado (mejor si es potencia de 2).
 	 */
-	int TAMANO = 70;
+	private int TAMANO;
+	
 	
 
 	/**
@@ -217,8 +218,8 @@ public class CargadorImagenes {
 			if (imageViewReusado(fotoAcargar))
 				return;
 			Bitmap bmp = getBitmap(fotoAcargar.url);
-			if(bmp==null)
-				bmp = getBitmap(Utilidades.PROCESANDO);
+			/*if(bmp==null)
+				bmp = getBitmap(Utilidades.PROCESANDO);*/
 			cacheMemoria.put(fotoAcargar.url, bmp);
 			if (imageViewReusado(fotoAcargar))
 				return;
@@ -301,5 +302,6 @@ public class CargadorImagenes {
 		cacheMemoria.limpiaCacheMemoria();
 		cacheArchivo.limpiaCacheArchivo();
 	}
+	
 
 }

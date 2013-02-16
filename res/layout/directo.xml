@@ -31,6 +31,6 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentRight="true"
 	        android:layout_alignParentTop="true"
-	        android:src="@drawable/marca_agua" />
+	        android:src="@drawable/reproductor" />
 	
 </RelativeLayout>

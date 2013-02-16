@@ -125,18 +125,21 @@ public class ObjetoActivity extends Activity {
 		// Justificar la descripcion (como se vea, depende de cada pantalla).
 		JustificaTexto.justifica(((TextView) findViewById(R.id.TVdescripcion)),	340f);
 		
+		
+		//Añadimos la foto de la noticia.
+		ImageView IVurl_foto = (ImageView) findViewById(R.id.IVurl_foto);
+		
+		// Cargar la nueva imagen a partir de la URL.
+		CargadorImagenes cargadorImagenes = new CargadorImagenes(getApplicationContext());
+		//Cargarla en tamano grande G.
+		cargadorImagenes.muestraImagen(url_foto, IVurl_foto, "G");
+					
 		//Si la imagen se ha cargado correctamente, añadimos el listener.
-		if(in.getStringExtra("imagencorrecta").equals("SI")){
+		if(!in.getStringExtra("cargando").equals("si")){
 			System.out.println("IMAGEN CORRECTAAAAAAAA");
 			
-			//Añadimos la foto de la noticia.
-			ImageView IVurl_foto = (ImageView) findViewById(R.id.IVurl_foto);
+			//Alpha a la imagen
 			IVurl_foto.setAlpha(200);
-			
-			// Cargar la nueva imagen a partir de la URL.
-			CargadorImagenes cargadorImagenes = new CargadorImagenes(getApplicationContext());
-			//Cargarla en tamano grande G.
-			cargadorImagenes.muestraImagen(url_foto, IVurl_foto, "G");
 			
 			//Click listener.
 			IVurl_foto.setOnClickListener(new View.OnClickListener() {

@@ -113,7 +113,7 @@ public class AdaptadorLista extends BaseAdapter {
 		//Campo oculto en objetoxml para saber si ha sido cargada o no.
 		cargadorImagenes.muestraImagen(menuItems.get(position).getUrl_foto(), (ImageView) vista.findViewById(R.id.IVurl_foto), "P");
 		
-		System.out.println("CARGANDO IMAGEN " + position + ", CORRECTO: " + ((TextView) vista.findViewById(R.id.TVimagenCorrecta)).getText().toString());
+		
 		return vista;
 	}
 }
