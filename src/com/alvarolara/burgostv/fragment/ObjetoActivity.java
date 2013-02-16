@@ -9,6 +9,7 @@ import com.alvarolara.burgostv.utiles.AdaptadorLista;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 /**
@@ -40,6 +41,9 @@ public class ObjetoActivity extends FragmentActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		
 		setContentView(R.layout.listadetalle);
+		
+		//Alpha al play.
+		((ImageView) findViewById(R.id.IVplay)).setAlpha(200);
 		
 		// Recoger el hashmap mediante un intent.
 		menuItems = (ArrayList<Objeto>) getIntent()

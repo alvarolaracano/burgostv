@@ -78,6 +78,10 @@ public class VideoActivity extends Activity implements OnCompletionListener,
 		
 		// No apagar la pantalla.
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		
+		
+		//Alpha al play.
+		((ImageView) findViewById(R.id.IVplay)).setAlpha(200);
 
 		// Instanciar Utilidades.
 		utilidades = new Utilidades();

@@ -92,7 +92,7 @@ public class ObjetoDetalleFragment extends Fragment {
 	public void setOnClickListenerImagen(final Activity actividad, final String url_video){
 		//Evento en el reproductor.
 		ImageView lblUrl_foto = (ImageView) getView().findViewById(R.id.IVurl_foto);
-		lblUrl_foto.setAlpha(200);
+		
 		
 		lblUrl_foto.setOnClickListener(new View.OnClickListener() {
 

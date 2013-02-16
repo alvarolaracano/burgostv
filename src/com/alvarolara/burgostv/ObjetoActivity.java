@@ -53,6 +53,10 @@ public class ObjetoActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.objeto);
+		
+		
+		//Alpha al play.
+		((ImageView) findViewById(R.id.IVplay)).setAlpha(200);
 
 		// Obtener datos del intent.
 		Intent in = getIntent();
@@ -137,9 +141,6 @@ public class ObjetoActivity extends Activity {
 		//Si la imagen se ha cargado correctamente, añadimos el listener.
 		if(!in.getStringExtra("cargando").equals("si")){
 			System.out.println("IMAGEN CORRECTAAAAAAAA");
-			
-			//Alpha a la imagen
-			IVurl_foto.setAlpha(200);
 			
 			//Click listener.
 			IVurl_foto.setOnClickListener(new View.OnClickListener() {
