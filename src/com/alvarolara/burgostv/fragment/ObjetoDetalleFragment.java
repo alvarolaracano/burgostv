@@ -55,7 +55,7 @@ public class ObjetoDetalleFragment extends Fragment {
 	 * @param titulo
 	 */
 	public void setTitulo(String titulo) {
-		TextView  TVtitulo= (TextView) getView().findViewById(R.id.titulo);
+		TextView  TVtitulo= (TextView) getView().findViewById(R.id.TVtitulo);
 		TVtitulo.setText(titulo);
 	}
 	
@@ -64,7 +64,7 @@ public class ObjetoDetalleFragment extends Fragment {
 	 * @param descripcion
 	 */
 	public void setDescripcion(String descripcion){
-		TextView TVdescripcion = (TextView) getView().findViewById(R.id.descripcion);
+		TextView TVdescripcion = (TextView) getView().findViewById(R.id.TVdescripcion);
 		TVdescripcion.setText(descripcion);
 	}
 	
@@ -75,7 +75,7 @@ public class ObjetoDetalleFragment extends Fragment {
 	public void setImagen(String imagen){
 		
 		//Poner la imagen como parametro.
-		ImageView IVurl_foto = (ImageView) getView().findViewById(R.id.url_foto);
+		ImageView IVurl_foto = (ImageView) getView().findViewById(R.id.IVurl_foto);
 		
 		// Cargar la nueva imagen a partir de la URL.
 		CargadorImagenes cargadorImagenes = new CargadorImagenes(getActivity().getApplicationContext());
@@ -91,7 +91,7 @@ public class ObjetoDetalleFragment extends Fragment {
 	 */
 	public void setOnClickListenerImagen(final Activity actividad, final String url_video){
 		//Evento en el reproductor.
-		ImageView lblUrl_foto = (ImageView) getView().findViewById(R.id.url_foto);
+		ImageView lblUrl_foto = (ImageView) getView().findViewById(R.id.IVurl_foto);
 		lblUrl_foto.setAlpha(200);
 		
 		lblUrl_foto.setOnClickListener(new View.OnClickListener() {

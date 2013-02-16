@@ -71,9 +71,9 @@ public class PrincipalActivity extends Activity {
 			/**
 			 * NOTICIAS.
 			 */
-			ImageButton botonnoticias = (ImageButton) findViewById(R.id.botonnoticias);
+			ImageButton IBnoticias = (ImageButton) findViewById(R.id.IBnoticias);
 
-			botonnoticias.setOnClickListener(new OnClickListener() {
+			IBnoticias.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
 					// Al hacer click en el boton. Llamar a CargaXML y que esta
@@ -90,9 +90,9 @@ public class PrincipalActivity extends Activity {
 			/**
 			 * REPORTAJES.
 			 */
-			ImageButton botonreportajes = (ImageButton) findViewById(R.id.botonreportajes);
+			ImageButton IBreportajes = (ImageButton) findViewById(R.id.IBreportajes);
 
-			botonreportajes.setOnClickListener(new OnClickListener() {
+			IBreportajes.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
 					// Al hacer click en el boton. Llamar a CargaXML y que esta
@@ -108,9 +108,9 @@ public class PrincipalActivity extends Activity {
 			/**
 			 * MAS DEPORTE.
 			 */
-			ImageButton botonmasdeporte = (ImageButton) findViewById(R.id.botonmasdeporte);
+			ImageButton IBmasdeporte = (ImageButton) findViewById(R.id.IBmasdeporte);
 
-			botonmasdeporte.setOnClickListener(new OnClickListener() {
+			IBmasdeporte.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
 					// Al hacer click en el boton. Llamar a CargaXML y que esta
@@ -126,9 +126,9 @@ public class PrincipalActivity extends Activity {
 			/**
 			 * VIDEOENCUENTRO.
 			 */
-			ImageButton botonvideoencuentro = (ImageButton) findViewById(R.id.botonvideoencuentro);
+			ImageButton IBvideoencuentro = (ImageButton) findViewById(R.id.IBvideoencuentro);
 
-			botonvideoencuentro.setOnClickListener(new OnClickListener() {
+			IBvideoencuentro.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
 					// Al hacer click en el boton. Llamar a CargaXML y que esta
@@ -144,9 +144,9 @@ public class PrincipalActivity extends Activity {
 			/**
 			 * DIRECTO.
 			 */
-			ImageButton botondirecto = (ImageButton) findViewById(R.id.botondirecto);
-
-			botondirecto.setOnClickListener(new OnClickListener() {
+			ImageButton IBdirecto = (ImageButton) findViewById(R.id.IBdirecto);
+			/*
+			IBdirecto.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
 					if (streaming.contains("SI")) {
@@ -168,14 +168,14 @@ public class PrincipalActivity extends Activity {
 
 				}
 
-			});
+			});*/
 
 			/**
 			 * BUSCAR.
 			 */
-			ImageButton botonbuscar = (ImageButton) findViewById(R.id.botonbuscar);
+			ImageButton IBbuscar = (ImageButton) findViewById(R.id.IBbuscar);
 
-			botonbuscar.setOnClickListener(new OnClickListener() {
+			IBbuscar.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
 					Intent in = new Intent(getApplicationContext(),

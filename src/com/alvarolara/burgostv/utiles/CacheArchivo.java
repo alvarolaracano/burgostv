@@ -25,7 +25,7 @@ public class CacheArchivo {
 				android.os.Environment.MEDIA_MOUNTED))
 			directorioCache = new File(
 					android.os.Environment.getExternalStorageDirectory(),
-					"AdaptadorLista");
+					Utilidades.DIRECTORIO_APLICACION);
 		else
 			directorioCache = context.getCacheDir();
 		if (!directorioCache.exists())

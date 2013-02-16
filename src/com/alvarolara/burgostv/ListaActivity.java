@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
@@ -68,25 +69,30 @@ public class ListaActivity extends ListActivity {
 				// Comprobar la conexion a internet.
 				if (Utilidades.hayInternet(ListaActivity.this, false)) {
 
-					// Obtener valores de los objetos.
-					String titulo = ((TextView) view.findViewById(R.id.titulo))
-							.getText().toString();
-					String descripcion = ((TextView) view
-							.findViewById(R.id.descripcion)).getText()
-							.toString();
-					String url_foto = ((TextView) view
-							.findViewById(R.id.url_foto_textview)).getText()
-							.toString();
-					String url_video = ((TextView) view
-							.findViewById(R.id.url_video)).getText().toString();
-
-					// Nuevo intent de texto.
-					Intent in = new Intent(getApplicationContext(),
-							ObjetoActivity.class);
-					in.putExtra(Utilidades.KEY_TITULO, titulo);
-					in.putExtra(Utilidades.KEY_URL_FOTO, url_foto);
-					in.putExtra(Utilidades.KEY_DESCRIPCION, descripcion);
-					in.putExtra(Utilidades.KEY_URL_VIDEO, url_video);
+					// Nuevo intent para OjetoActivity.
+					Intent in = new Intent(getApplicationContext(),	ObjetoActivity.class);
+					
+					//Titulo.
+					String TVtitulo = ((TextView) view.findViewById(R.id.TVtitulo)).getText().toString();
+					in.putExtra(Utilidades.KEY_TITULO, TVtitulo);
+					
+					//Url_foto.
+					String TVurl_foto = ((TextView) view.findViewById(R.id.TVurl_foto)).getText().toString();
+					in.putExtra(Utilidades.KEY_URL_FOTO, TVurl_foto);
+					
+					//Descripcion.
+					String TVdescripcion = ((TextView) view.findViewById(R.id.TVdescripcion)).getText().toString();
+					in.putExtra(Utilidades.KEY_DESCRIPCION, TVdescripcion);
+					
+					//Url_video.
+					String TVurl_video = ((TextView) view.findViewById(R.id.TVurl_video)).getText().toString();
+					in.putExtra(Utilidades.KEY_URL_VIDEO, TVurl_video);
+					
+					//Imagencorrecta.
+					String TVimagenCorrecta = ((TextView) view.findViewById(R.id.TVimagenCorrecta)).getText().toString();
+					in.putExtra("imagencorrecta", TVimagenCorrecta);
+					
+					//Comenzar la actividad.
 					startActivity(in);
 				}
 			}

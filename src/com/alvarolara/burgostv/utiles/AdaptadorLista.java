@@ -87,31 +87,33 @@ public class AdaptadorLista extends BaseAdapter {
 		View vista = convertView;
 		if (convertView == null)
 			vista = inflater.inflate(R.layout.lista_filas, null);
-
-		TextView titulo = (TextView) vista.findViewById(R.id.titulo);
-		TextView descripcion = (TextView) vista.findViewById(R.id.descripcion);
-		TextView url_video = (TextView) vista.findViewById(R.id.url_video);
-		ImageView url_foto = (ImageView) vista.findViewById(R.id.url_foto);
-		TextView fecha = (TextView) vista.findViewById(R.id.fecha);
-		// Url de la foto del textview Oculto.
-		TextView url_foto_textview = (TextView) vista
-				.findViewById(R.id.url_foto_textview);
-
-		Objeto objeto = new Objeto();
-		objeto = menuItems.get(position);
-
-		// Colocar los valores en el ListView.
-		titulo.setText(objeto.getTitulo());
-		descripcion.setText(objeto.getDescripcion());
-		url_video.setText(objeto.getUrl_video());
-		fecha.setText(objeto.getFecha());
-
-		// Cargar la URL para pasarla mediante un Intent.
-		url_foto_textview.setText(objeto.getUrl_foto());
+		
+		//Titulo.
+		TextView TVtitulo = (TextView) vista.findViewById(R.id.TVtitulo);
+		TVtitulo.setText(menuItems.get(position).getTitulo());
+		
+		//Descripcion.
+		TextView TVdescripcion = (TextView) vista.findViewById(R.id.TVdescripcion);
+		TVdescripcion.setText(menuItems.get(position).getDescripcion());
+		
+		//Url_video.
+		TextView TVurl_video = (TextView) vista.findViewById(R.id.TVurl_video);
+		TVurl_video.setText(menuItems.get(position).getUrl_video());
+		
+		//Fecha
+		TextView TVfecha = (TextView) vista.findViewById(R.id.TVfecha);
+		TVfecha.setText(menuItems.get(position).getFecha());
+		
+		// Url_foto del textview Oculto.
+		TextView TVurl_foto = (TextView) vista.findViewById(R.id.TVurl_foto);
+		TVurl_foto.setText(menuItems.get(position).getUrl_foto());
+		
 
 		// Dibujar la imagen.
-		cargadorImagenes.muestraImagen(objeto.getUrl_foto(), url_foto,
-				"P");
+		//Campo oculto en objetoxml para saber si ha sido cargada o no.
+		cargadorImagenes.muestraImagen(menuItems.get(position).getUrl_foto(), (ImageView) vista.findViewById(R.id.IVurl_foto), "P");
+		
+		System.out.println("CARGANDO IMAGEN " + position + ", CORRECTO: " + ((TextView) vista.findViewById(R.id.TVimagenCorrecta)).getText().toString());
 		return vista;
 	}
 }

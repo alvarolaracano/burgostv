@@ -15,6 +15,16 @@ import android.widget.Toast;
 public class Utilidades {
 	
 	/**
+	 * Constante para almacenar el cache de la aplicacion.
+	 */
+	public static final String DIRECTORIO_APLICACION = "burgostv";
+	
+	/**
+	 * COnstante para la imagen de procesando.
+	 */
+	public static final String PROCESANDO = "http://www.burgostv.es/imagenes/procesando/procesando.png";
+	
+	/**
 	 * Constantes para las URLS.
 	 * 
 	 */

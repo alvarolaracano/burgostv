@@ -3,9 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/degradado_lista"
-    android:orientation="vertical" 
-    android:paddingLeft="10dip"
-    android:paddingRight="10dip">
+    android:orientation="vertical" >
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -14,10 +12,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip" >
 
             <TextView
-                android:id="@+id/titulo"
+                android:id="@+id/TVtitulo"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="50dp"
@@ -38,30 +38,31 @@
                     android:layout_height="match_parent" >
 
                     <ImageView
-                        android:id="@+id/url_foto"
+                        android:id="@+id/IVurl_foto"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
                         android:src="@drawable/noticia_grande" />
 
                     <ImageView
-                        android:id="@+id/play"
+                        android:id="@+id/IVplay"
                         android:layout_width="350dip"
                         android:layout_height="155dip"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        
                         android:src="@drawable/play" />
-
                 </RelativeLayout>
             </LinearLayout>
 
             <TextView
-                android:id="@+id/descripcion"
+                android:id="@+id/TVdescripcion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:maxWidth="608px"
                 android:paddingTop="10dip"
                 android:text="Descripcion."
                 android:textColor="#343434"

@@ -29,21 +29,20 @@
                 android:layout_gravity="center_horizontal" >
 
                 <TableRow
-                    android:id="@+id/tableRow1"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:paddingTop="30dp" >
 
                     <ImageButton
-                        android:id="@+id/botonnoticias"
+                        android:id="@+id/IBnoticias"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginRight="15dip"
                         android:background="@drawable/principal_noticias" />
 
                     <ImageButton
-                        android:id="@+id/botonreportajes"
+                        android:id="@+id/IBreportajes"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginLeft="15dip"
@@ -51,20 +50,19 @@
                 </TableRow>
 
                 <TableRow
-                    android:id="@+id/tableRow2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="30dp" >
 
                     <ImageButton
-                        android:id="@+id/botonmasdeporte"
+                        android:id="@+id/IBmasdeporte"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginRight="15dip"
                         android:background="@drawable/principal_mas_deporte" />
 
                     <ImageButton
-                        android:id="@+id/botonvideoencuentro"
+                        android:id="@+id/IBvideoencuentro"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginLeft="15dip"
@@ -72,20 +70,19 @@
                 </TableRow>
 
                 <TableRow
-                    android:id="@+id/tableRow3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="30dp" >
 
                     <ImageButton
-                        android:id="@+id/botondirecto"
+                        android:id="@+id/IBdirecto"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginRight="15dip"
                         android:background="@drawable/principal_directo" />
 
                     <ImageButton
-                        android:id="@+id/botonbuscar"
+                        android:id="@+id/IBbuscar"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginLeft="15dip"

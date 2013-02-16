@@ -7,7 +7,7 @@
     android:padding="5dip" >
 
     <LinearLayout
-        android:id="@+id/thumbnail"
+        android:id="@+id/LLminiatura"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -16,7 +16,7 @@
         android:padding="3dip" >
 
         <ImageView
-            android:id="@+id/url_foto"
+            android:id="@+id/IVurl_foto"
             android:layout_width="90dip"
             android:layout_height="49dip"
             android:src="@drawable/noticia" />
@@ -25,13 +25,13 @@
     <!-- Titulo de la noticia -->
 
     <TextView
-        android:id="@+id/titulo"
+        android:id="@+id/TVtitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/thumbnail"
+        android:layout_alignTop="@+id/LLminiatura"
         android:layout_marginRight="5dip"
-        android:layout_toLeftOf="@+id/flecha"
-        android:layout_toRightOf="@+id/thumbnail"
+        android:layout_toLeftOf="@+id/IVflecha"
+        android:layout_toRightOf="@+id/LLminiatura"
         android:text="La Diputación Provincial firma un convenio de colaboración "
         android:textColor="#040404"
         android:textSize="12dip"
@@ -39,7 +39,7 @@
         android:typeface="sans" />
 
     <ImageView
-        android:id="@+id/flecha"
+        android:id="@+id/IVflecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -47,11 +47,11 @@
         android:src="@drawable/flecha" />
 
     <TextView
-        android:id="@+id/fecha"
+        android:id="@+id/TVfecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/thumbnail"
-        android:layout_alignRight="@+id/flecha"
+        android:layout_alignBottom="@+id/LLminiatura"
+        android:layout_alignRight="@+id/IVflecha"
         android:gravity="right"
         android:text="09/05/2013"
         android:textColor="#073278"
@@ -61,23 +61,30 @@
     <!-- OCULTOS -->
 
     <TextView
-        android:id="@+id/url_foto_textview"
+        android:id="@+id/TVurl_foto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/descripcion"
+        android:id="@+id/TVdescripcion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Descripcion  de la noticia."
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/url_video"
+        android:id="@+id/TVurl_video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="url_video"
+        android:visibility="gone" />
+    
+    <TextView
+        android:id="@+id/TVimagenCorrecta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NO"
         android:visibility="gone" />
 
     <!-- FIN OCULTOS -->

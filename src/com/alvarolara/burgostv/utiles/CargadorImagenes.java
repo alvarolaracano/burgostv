@@ -21,6 +21,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * Carga las imagenes.
@@ -65,7 +66,7 @@ public class CargadorImagenes {
 		executorService = Executors.newFixedThreadPool(5);
 	}
 
-	final int IVnoticia = R.drawable.noticia;
+	int IVnoticia ;
 
 	/**
 	 * Muestra la imagen.
@@ -78,10 +79,11 @@ public class CargadorImagenes {
 		if (tamano.contains("P")) {
 			// tamaño pequeño.
 			TAMANO = 70;
+			IVnoticia = R.drawable.noticia;
 		} else {
 			// tamaño grande.
 			TAMANO = 300;
-
+			IVnoticia = R.drawable.noticia_grande;
 		}
 
 		imageViews.put(imageView, url);
@@ -133,6 +135,8 @@ public class CargadorImagenes {
 			copiaStream(is, os);
 			os.close();
 			bitmap = decodificaArchivo(archivo);
+			/*if(bitmap==null)
+				bitmap = getBitmap(Utilidades.PROCESANDO);*/
 			return bitmap;
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -213,6 +217,8 @@ public class CargadorImagenes {
 			if (imageViewReusado(fotoAcargar))
 				return;
 			Bitmap bmp = getBitmap(fotoAcargar.url);
+			if(bmp==null)
+				bmp = getBitmap(Utilidades.PROCESANDO);
 			cacheMemoria.put(fotoAcargar.url, bmp);
 			if (imageViewReusado(fotoAcargar))
 				return;

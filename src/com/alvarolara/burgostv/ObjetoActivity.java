@@ -57,6 +57,7 @@ public class ObjetoActivity extends Activity {
 		// Obtener datos del intent.
 		Intent in = getIntent();
 		// Saber la procedencia del intent, recogiendo datos como el titulo.
+		//Si no procede del intent, recogemos parametros para descargar de internet.
 		if (in.getSerializableExtra(Utilidades.KEY_TITULO) == null) {
 
 			String url = "http://www.burgostv.es/android/xml-url.php?tipo=";
@@ -114,44 +115,58 @@ public class ObjetoActivity extends Activity {
 
 		}
 
-		TextView lblTitulo = (TextView) findViewById(R.id.titulo);
-		ImageView lblUrl_foto = (ImageView) findViewById(R.id.url_foto);
-		lblUrl_foto.setAlpha(200);
-
-		TextView lblDescripcion = (TextView) findViewById(R.id.descripcion);
-
-		lblTitulo.setText(titulo);
-
-		// Cargar la nueva imagen a partir de la URL.
-		CargadorImagenes cargadorImagenes = new CargadorImagenes(getApplicationContext());
-		//Cargarla en tamano grande G.
-		cargadorImagenes.muestraImagen(url_foto, lblUrl_foto, "G");
-
-		// Toast.makeText(getApplicationContext(), url_foto,
-		// Toast.LENGTH_LONG).show();
-
-		lblDescripcion.setText(descripcion);
-
-		// Justificar el texto (como se vea, depende de cada pantalla).
-		JustificaTexto.justifica(((TextView) findViewById(R.id.descripcion)),
-				340f);
-
+		//Establecer el titulo.
+		TextView TVtitulo = (TextView) findViewById(R.id.TVtitulo);
+		TVtitulo.setText(titulo);
 		
-
-		lblUrl_foto.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View v) {
-				// Comprobar la conexion a internet.
-				if (Utilidades.hayInternet(ObjetoActivity.this, false)) {
-					
-					// Intent para videoactivity.
-					Intent in = new Intent(getApplicationContext(),
-							VideoActivity.class);
-					in.putExtra(Utilidades.KEY_URL_VIDEO, url_video);
-					startActivity(in);
+		//Establecer descripcion.
+		TextView TVdescripcion = (TextView) findViewById(R.id.TVdescripcion);
+		TVdescripcion.setText(descripcion);
+		// Justificar la descripcion (como se vea, depende de cada pantalla).
+		JustificaTexto.justifica(((TextView) findViewById(R.id.TVdescripcion)),	340f);
+		
+		//Si la imagen se ha cargado correctamente, añadimos el listener.
+		if(in.getStringExtra("imagencorrecta").equals("SI")){
+			System.out.println("IMAGEN CORRECTAAAAAAAA");
+			
+			//Añadimos la foto de la noticia.
+			ImageView IVurl_foto = (ImageView) findViewById(R.id.IVurl_foto);
+			IVurl_foto.setAlpha(200);
+			
+			// Cargar la nueva imagen a partir de la URL.
+			CargadorImagenes cargadorImagenes = new CargadorImagenes(getApplicationContext());
+			//Cargarla en tamano grande G.
+			cargadorImagenes.muestraImagen(url_foto, IVurl_foto, "G");
+			
+			//Click listener.
+			IVurl_foto.setOnClickListener(new View.OnClickListener() {
+				
+				public void onClick(View v) {
+					// Comprobar la conexion a internet.
+					if (Utilidades.hayInternet(ObjetoActivity.this, false)) {
+						
+						// Intent para videoactivity.
+						Intent in = new Intent(getApplicationContext(),
+								VideoActivity.class);
+						in.putExtra(Utilidades.KEY_URL_VIDEO, url_video);
+						startActivity(in);
+					}
 				}
-			}
-		});
+			});
+		}else{
+			//No añadimos el listener y ocultamos el boton de reproducir.
+			System.out.println("IMAGEN NOOO CORRECTAAAAAAAA");
+			
+			//Ocultar el play y no añadir el listener.
+			((ImageView) findViewById(R.id.IVplay)).setVisibility(View.GONE);
+		}
+			
+	
+
+			
+				
+			
+		
 
 	}
 
