@@ -60,6 +60,7 @@ public class CargaXML extends AsyncTask<Void, Void, Void> {
 	 */
 	boolean error = false;
 
+	
 	/**
 	 * Constructor del AsycTask.
 	 * 
@@ -71,13 +72,22 @@ public class CargaXML extends AsyncTask<Void, Void, Void> {
 		this.portrait = portrait;
 
 		// Preparar el ProgressDialog.
-		progress = new ProgressDialog(contexto);
-		progress.setCancelable(false);
-		progress.setMessage("Obteniendo datos...");
-		progress.setTitle("Por favor, espere");
-		progress.setIndeterminate(true);
+		muestraProgress();
+	}
+	
+	
+	/**
+	 * Constructor de clase simple.
+	 */
+	public CargaXML(Context contexto, String URL){
+		this.contexto = contexto;
+		this.URL = URL;
+		
+		muestraProgress();
+		progress.show();
 	}
 
+	
 	/**
 	 * Antes de ejecutarse.
 	 */
@@ -91,38 +101,9 @@ public class CargaXML extends AsyncTask<Void, Void, Void> {
 	protected Void doInBackground(Void... params) {
 
 		Log.i("doInBackground(): ", "proceso en background");
-
-		menuItems = new ArrayList<Objeto>();
-
-		ParseadorXML parser = new ParseadorXML(URL, Utilidades.KEY_ITEM_OBJETO);
-
-		try {
-
-			// Si la longitud del nodelist es 0 al buscar la clave 'item',
-			// lanzamos excepcion para que aparezca ErrorActivity.
-			if (parser.getNodeList().getLength() == 0) {
-				throw new Exception();
-			} else {
-				// Todos los <item>.
-				for (int i = 0; i < parser.getNodeList().getLength(); i++) {
-					Log.i("for: ", "ejecuta el for");
-					
-					//ELemento actual.
-					Element e = (Element) parser.getNodeList().item(i);
-					
-					// Nuevo Objeto auxiliar.
-					Objeto aux = new Objeto(parser.getValor(e, Utilidades.KEY_TITULO), parser.getValor(e, Utilidades.KEY_DESCRIPCION), parser.getValor(e, Utilidades.KEY_URL_FOTO), parser.getValor(e, Utilidades.KEY_URL_VIDEO), parser.getValor(e, Utilidades.KEY_FECHA));
-
-					// Añadir el Objeto al ArrayList.
-					menuItems.add(aux);
-				}
-				Log.i("acaba el for: ", "acaba el for");
-			}
-		} catch (Exception e) {
-			error = true;
-			contexto.startActivity(new Intent(contexto
-					.getApplicationContext(), ErrorActivity.class));
-		}
+		
+		menuItems = parsea();
+		
 		return null;
 	}
 
@@ -152,6 +133,68 @@ public class CargaXML extends AsyncTask<Void, Void, Void> {
 				in.putExtra("xml", menuItems);
 				contexto.startActivity(in);
 			}
+		}
+	}
+	
+	
+	/**
+	 * Parsea los objetos.
+	 * @return menuItems
+	 */
+	public ArrayList<Objeto> parsea(){
+		menuItems = new ArrayList<Objeto>();
+
+		ParseadorXML parser = new ParseadorXML(URL, Utilidades.KEY_ITEM_OBJETO);
+
+		try {
+
+			// Si la longitud del nodelist es 0 al buscar la clave 'item',
+			// lanzamos excepcion para que aparezca ErrorActivity.
+			if (parser.getNodeList().getLength() == 0) {
+				throw new Exception();
+			} else {
+				Log.i("for", "ejecuta el for");
+				// Todos los <item>.
+				for (int i = 0; i < parser.getNodeList().getLength(); i++) {
+					
+					//ELemento actual.
+					Element e = (Element) parser.getNodeList().item(i);
+					
+					// Nuevo Objeto auxiliar.
+					Objeto aux = new Objeto(parser.getValor(e, Utilidades.KEY_TITULO), parser.getValor(e, Utilidades.KEY_DESCRIPCION), parser.getValor(e, Utilidades.KEY_URL_FOTO), parser.getValor(e, Utilidades.KEY_URL_VIDEO), parser.getValor(e, Utilidades.KEY_FECHA));
+
+					// Añadir el Objeto al ArrayList.
+					menuItems.add(aux);
+				}
+				Log.i("for", "acaba el for");
+			}
+		} catch (Exception e) {
+			error = true;
+			contexto.startActivity(new Intent(contexto
+					.getApplicationContext(), ErrorActivity.class));
+		}
+		return menuItems;
+	}
+	
+	
+	/**
+	 * Muestra el progress.
+	 */
+	public void muestraProgress(){
+		progress = new ProgressDialog(contexto);
+		progress.setCancelable(false);
+		progress.setMessage("Obteniendo datos...");
+		progress.setTitle("Por favor, espere");
+		progress.setIndeterminate(true);
+	}
+	
+	
+	/**
+	 * Oculta el progress.
+	 */
+	public void ocultaProgress(){
+		if (progress != null && progress.isShowing()) {
+			progress.dismiss();
 		}
 	}
 }

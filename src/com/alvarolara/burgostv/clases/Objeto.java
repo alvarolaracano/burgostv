@@ -79,6 +79,17 @@ public class Objeto implements Serializable{
 		this.fecha = fecha;
 	}
 	
+	
+	/**
+	 * Metodo toString.
+	 */
+	@Override
+	public String toString() {
+		return "Objeto [titulo=" + titulo + ", descripcion=" + descripcion
+				+ ", url_foto=" + url_foto + ", url_video=" + url_video
+				+ ", fecha=" + fecha + "]";
+	}
+
 
 	/**
 	 * Devuelve el titulo.

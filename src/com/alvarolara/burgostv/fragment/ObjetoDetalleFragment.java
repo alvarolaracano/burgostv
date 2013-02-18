@@ -2,6 +2,7 @@ package com.alvarolara.burgostv.fragment;
 
 import com.alvarolara.burgostv.R;
 import com.alvarolara.burgostv.VideoActivity;
+import com.alvarolara.burgostv.clases.Objeto;
 import com.alvarolara.burgostv.utiles.CargadorImagenes;
 import com.alvarolara.burgostv.utiles.Utilidades;
 
@@ -50,46 +51,19 @@ public class ObjetoDetalleFragment extends Fragment {
 		return view;
 	}
 
-	/**
-	 * Establece el titulo.
-	 * @param titulo
-	 */
-	public void setTitulo(String titulo) {
-		TextView  TVtitulo= (TextView) getView().findViewById(R.id.TVtitulo);
-		TVtitulo.setText(titulo);
-	}
-	
-	/**
-	 * Establece la descripcion.
-	 * @param descripcion
-	 */
-	public void setDescripcion(String descripcion){
-		TextView TVdescripcion = (TextView) getView().findViewById(R.id.TVdescripcion);
-		TVdescripcion.setText(descripcion);
-	}
-	
-	/**
-	 * Establece la imagen.
-	 * @param imagen
-	 */
-	public void setImagen(String imagen){
+	public void setObjeto(final Activity actividad, final Objeto objeto){
 		
-		//Poner la imagen como parametro.
-		ImageView IVurl_foto = (ImageView) getView().findViewById(R.id.IVurl_foto);
+		//Establemos el titulo.
+		((TextView) getView().findViewById(R.id.TVtitulo)).setText(objeto.getTitulo());
 		
 		// Cargar la nueva imagen a partir de la URL.
 		CargadorImagenes cargadorImagenes = new CargadorImagenes(getActivity().getApplicationContext());
 		//Cargarla en tamano grande G.
-		cargadorImagenes.muestraImagen(imagen, IVurl_foto, "G");
+		cargadorImagenes.muestraImagen(objeto.getUrl_foto(), (ImageView) getView().findViewById(R.id.IVurl_foto), "G");
 		
-	}
-	
-	/**
-	 * Establece el clickLIstener a la imagen.
-	 * @param actividad
-	 * @param url_video
-	 */
-	public void setOnClickListenerImagen(final Activity actividad, final String url_video){
+		//Establecemos la descripcion.
+		((TextView) getView().findViewById(R.id.TVdescripcion)).setText(objeto.getDescripcion());
+		
 		//Evento en el reproductor.
 		ImageView lblUrl_foto = (ImageView) getView().findViewById(R.id.IVurl_foto);
 		
@@ -103,7 +77,7 @@ public class ObjetoDetalleFragment extends Fragment {
 					// Intent para videoactivity.
 					Intent in = new Intent(getActivity().getApplicationContext(),
 							VideoActivity.class);
-					in.putExtra(Utilidades.KEY_URL_VIDEO, url_video);
+					in.putExtra(Utilidades.KEY_URL_VIDEO, objeto.getUrl_video());
 					startActivity(in);
 				}
 			}

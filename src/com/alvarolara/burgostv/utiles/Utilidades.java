@@ -1,9 +1,16 @@
 package com.alvarolara.burgostv.utiles;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.alvarolara.burgostv.clases.Objeto;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -19,10 +26,6 @@ public class Utilidades {
 	 */
 	public static final String DIRECTORIO_APLICACION = "burgostv";
 	
-	/**
-	 * COnstante para la imagen de procesando.
-	 */
-	public static final String PROCESANDO = "http://www.burgostv.es/imagenes/procesando/procesando.png";
 	
 	/**
 	 * Constantes para las URLS.
@@ -157,5 +160,117 @@ public class Utilidades {
 			return false;
 		}
 		return true;
+	}
+	
+	
+	/**
+	 * Si no existe el parametro objeto en el intent,
+	 * recupera datos de la url del intent y devuelve
+	 * un objeto.
+	 * @param in
+	 * @return objeto
+	 */
+	public static Objeto creaUrlObjeto(Activity actividad, Intent in){
+		Objeto objeto = null;
+		
+		// Saber la procedencia del intent, recogiendo datos como el titulo.
+		//Si no procede del intent, recogemos parametros para descargar de internet.
+		
+		if(in.getSerializableExtra("objeto")!=null){
+			// Obtener los datos del intent. Solo ObjetoActivity.
+			objeto = (Objeto) in.getSerializableExtra("objeto");
+			
+		}else if(in.getStringExtra("url") != null) {
+			//Obtener datos de la url.
+			objeto = objetoUrl(in, actividad);
+			
+		} 
+		return objeto;
+	}
+	
+	/**
+	 * Obtiene datos de la url del intent y devuelve un objeto.
+	 * @param in
+	 * @param actividad
+	 * @return objeto
+	 */
+	public static Objeto objetoUrl(Intent in, Activity actividad){
+		
+		Objeto objeto = null;
+		
+		String url = "http://www.burgostv.es/android/xml-url.php?tipo=";
+
+		// Procede de una URL
+		/*Uri datos = in.getData();
+		System.out.println("URI: " + datos.toString());*/
+		Uri datos =  Uri.parse(in.getStringExtra("url"));
+		
+		List<String> params = datos.getPathSegments();
+
+		// Saber que parametro es el primero.
+		if (params.get(0).compareTo("noticias") == 0) {
+			// Si son noticias.
+
+			url += "noticia&url=" + params.get(4);
+
+			objeto = cargaObjetoDeUrl(actividad, url);
+
+		} else if (params.get(0).compareTo("reportajes") == 0) {
+			// Si son noticias.
+
+			url += "reportaje&url=" + params.get(2);
+
+			objeto = cargaObjetoDeUrl(actividad, url);
+
+		} else if (params.get(0).compareTo("mas-deporte") == 0) {
+			// Si son noticias.
+
+			url += "mas_deporte&url=" + params.get(4);
+
+			objeto = cargaObjetoDeUrl(actividad, url);
+
+		} else if (params.get(0).compareTo("burgos-en-persona") == 0) {
+			// Si son noticias.
+
+			url += "burgos_en_persona&url=" + params.get(4);
+
+			objeto = cargaObjetoDeUrl(actividad, url);
+
+		} else {
+			// Mostrar mensaje de error
+			Toast.makeText(actividad.getApplicationContext(),
+					"La url no se puede abrir.", Toast.LENGTH_LONG).show();
+
+			// Salir de la aplicacion.
+			actividad.finish();
+		}
+		return objeto;
+	}
+	
+	
+	/**
+	 * Carga informacion del objeto segun 
+	 * su URL obtenida a través del intent.
+	 * @param url
+	 * @return objeto
+	 */
+	public static Objeto cargaObjetoDeUrl(Activity actividad, String url) {
+
+		ParseadorXML parser = new ParseadorXML(url, Utilidades.KEY_ITEM_OBJETO);
+
+		try {
+			// Si el nodelist es 0 al buscar la clave 'item',
+			// lanzamos excepcion.
+			if (parser.getNodeList().getLength() == 0) {
+				throw new Exception();
+			} else {
+				// Extraer del XML el valor.
+				return new Objeto(parser.getValor(Utilidades.KEY_TITULO), parser.getValor(Utilidades.KEY_DESCRIPCION), parser.getValor(Utilidades.KEY_URL_FOTO), parser.getValor(Utilidades.KEY_URL_VIDEO));
+			}
+		} catch (Exception e) {
+			Toast.makeText(actividad.getApplicationContext(), "Error al abrir la URL.",
+					Toast.LENGTH_LONG).show();
+		}
+		return null;
 	}
 }

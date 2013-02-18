@@ -19,6 +19,11 @@ import android.widget.ListView;
 public class ObjetoListaFragment extends ListFragment {
 
 	/**
+	 * Objeto auxiliar.
+	 */
+	private Objeto objeto = null;
+	
+	/**
 	 * Actividad para el contexto.
 	 */
 	private Activity actividad;
@@ -38,13 +43,14 @@ public class ObjetoListaFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		
-		//Seleccionar el primer elemento de la lista.
-		Objeto item = (Objeto)getListAdapter().getItem(0);
+		if(objeto==null){
+			//Seleccionar el primer elemento de la lista.
+			objeto = (Objeto)getListAdapter().getItem(0);
+		}
 		ObjetoDetalleFragment fragment = (ObjetoDetalleFragment) getFragmentManager().findFragmentById(R.id.Fdetalle);
-		fragment.setTitulo(item.getTitulo());
-		fragment.setDescripcion(item.getDescripcion());
-		fragment.setImagen(item.getUrl_foto());
-		fragment.setOnClickListenerImagen(actividad, item.getUrl_video());
+		//Le pasamos el objeto seleccionado.
+		fragment.setObjeto(actividad, objeto);
+		
 	}
 
 	
@@ -54,20 +60,17 @@ public class ObjetoListaFragment extends ListFragment {
 	 */
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		
-		Objeto item = (Objeto)getListAdapter().getItem(position);
-		Log.i("item", Integer.toString(position));
+		objeto = (Objeto)getListAdapter().getItem(position);
 		
 		ObjetoDetalleFragment fragment = (ObjetoDetalleFragment) getFragmentManager().findFragmentById(R.id.Fdetalle);
 		if (fragment != null && fragment.isInLayout()) {
-			fragment.setTitulo(item.getTitulo());
-			fragment.setDescripcion(item.getDescripcion());
-			fragment.setImagen(item.getUrl_foto());
-			fragment.setOnClickListenerImagen(actividad, item.getUrl_video());
+			//Le pasamos el objeto seleccionado.
+			fragment.setObjeto(actividad, objeto);
 			
 		} else {
 			Intent intent = new Intent(getActivity().getApplicationContext(),
 					ObjetoDetalleFragment.class);
-			intent.putExtra("value", item);
+			intent.putExtra("value", objeto);
 			startActivity(intent);
 		}
 	}
@@ -76,7 +79,8 @@ public class ObjetoListaFragment extends ListFragment {
 	 * Establece el contexto.
 	 * @param actividad
 	 */
-	public void setContexto(Activity actividad){
+	public void setObjetoContexto(Objeto objeto, Activity actividad){
+		this.objeto = objeto;
 		this.actividad = actividad;
 	}
 
