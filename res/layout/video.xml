@@ -21,6 +21,12 @@
 		        android:layout_height="match_parent"
 		        android:src="@drawable/play_video"
 		        android:visibility="gone" />
+
+		    <ProgressBar
+		        android:id="@+id/PBcargando"
+		        style="@style/Cargando"
+		        android:layout_centerHorizontal="true"
+		        android:layout_centerVertical="true" />
 	
 		</RelativeLayout>
 	    <ImageView
