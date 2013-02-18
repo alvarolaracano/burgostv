@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.media.MediaPlayer.OnErrorListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 /**
@@ -78,6 +80,17 @@ public class DirectoActivity extends Activity implements OnCompletionListener {
 
 		VVdirecto.setMediaController(controlador);
 		VVdirecto.requestFocus();
+		
+		VVdirecto.setOnErrorListener(new OnErrorListener() {
+			
+			public boolean onError(MediaPlayer mp, int what, int extra) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getApplicationContext(), "Error al reproducir el video.",Toast.LENGTH_LONG).show();
+				finish();
+				return false;
+			}
+		});
+
 		VVdirecto.start();
 		VVdirecto.setOnCompletionListener(this);
 

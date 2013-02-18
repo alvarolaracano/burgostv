@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.media.MediaPlayer.OnErrorListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +19,7 @@ import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 /**
@@ -108,6 +110,17 @@ public class VideoActivity extends Activity implements OnCompletionListener,
 
 		VVvideo.setMediaController(controlador);
 		VVvideo.requestFocus();
+		
+		VVvideo.setOnErrorListener(new OnErrorListener() {
+			
+			public boolean onError(MediaPlayer mp, int what, int extra) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getApplicationContext(), "Error al reproducir el video.",Toast.LENGTH_LONG).show();
+				finish();
+				return false;
+			}
+		});
+		
 		VVvideo.start();
 		VVvideo.setOnCompletionListener(this);
 		updateProgressBar();
@@ -176,8 +189,6 @@ public class VideoActivity extends Activity implements OnCompletionListener,
 
 		// Si la posicion del seek es > del 15 % del buffer, mantenemos donde
 		// estaba.
-
-		// posicionbuffer-15 para un rango.
 		if (((posicionActual * 100) / duracionTotal) < SBbarraProgreso.getSecondaryProgress()) {
 			// Movernos a la posicionActual.
 			VVvideo.seekTo(posicionActual);
