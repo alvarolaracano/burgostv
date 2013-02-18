@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.MediaController;
+import android.widget.ProgressBar;
 import android.widget.VideoView;
 
 /**
@@ -95,6 +97,15 @@ public class DirectoActivity extends Activity implements OnCompletionListener {
 				}
 
 				return false;
+			}
+		});
+		
+		//Desactivar el progressbar cargando cuando acabe de cargarse.
+		VVdirecto.setOnPreparedListener(new OnPreparedListener() {
+			
+			public void onPrepared(MediaPlayer mp) {
+				// TODO Auto-generated method stub
+				((ProgressBar)findViewById(R.id.PBcargando)).setVisibility(View.GONE);
 			}
 		});
 
