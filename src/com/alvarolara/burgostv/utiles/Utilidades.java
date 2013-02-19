@@ -152,7 +152,7 @@ public class Utilidades {
 
 		// Si no hay wifi o no hay conexión de red, cerramos la aplicación.
 		if (hayWifi == false && hayMobile == false) {
-			Log.i("internet", "no hay internet");
+			Log.i("Utilidades", "no hay internet");
 			Toast.makeText(actividad, "Debe disponer de conexión a internet",
 					Toast.LENGTH_LONG).show();
 			if(salir)
@@ -200,49 +200,55 @@ public class Utilidades {
 		
 		String url = "http://www.burgostv.es/android/xml-url.php?tipo=";
 
-		// Procede de una URL
-		/*Uri datos = in.getData();
-		System.out.println("URI: " + datos.toString());*/
-		Uri datos =  Uri.parse(in.getStringExtra("url"));
-		
-		List<String> params = datos.getPathSegments();
-
-		// Saber que parametro es el primero.
-		if (params.get(0).compareTo("noticias") == 0) {
-			// Si son noticias.
-
-			url += "noticia&url=" + params.get(4);
-
-			objeto = cargaObjetoDeUrl(actividad, url);
-
-		} else if (params.get(0).compareTo("reportajes") == 0) {
-			// Si son noticias.
-
-			url += "reportaje&url=" + params.get(2);
-
-			objeto = cargaObjetoDeUrl(actividad, url);
-
-		} else if (params.get(0).compareTo("mas-deporte") == 0) {
-			// Si son noticias.
-
-			url += "mas_deporte&url=" + params.get(4);
-
-			objeto = cargaObjetoDeUrl(actividad, url);
-
-		} else if (params.get(0).compareTo("burgos-en-persona") == 0) {
-			// Si son noticias.
-
-			url += "burgos_en_persona&url=" + params.get(4);
-
-			objeto = cargaObjetoDeUrl(actividad, url);
-
-		} else {
-			// Mostrar mensaje de error
-			Toast.makeText(actividad.getApplicationContext(),
-					"La url no se puede abrir.", Toast.LENGTH_LONG).show();
-
-			// Salir de la aplicacion.
-			actividad.finish();
+		try{
+			// Procede de una URL
+			Uri datos =  Uri.parse(in.getStringExtra("url"));
+			
+			List<String> parametros = datos.getPathSegments();
+			Log.i("Utilidades","tamano de los parametros: " + parametros.size());
+	
+			// Saber que parametro es el primero.
+			if (parametros.get(0).compareTo("noticias") == 0) {
+				// Si son noticias.
+	
+				url += "noticia&url=" + parametros.get(4);
+	
+				objeto = cargaObjetoDeUrl(actividad, url);
+	
+			} else if (parametros.get(0).compareTo("reportajes") == 0) {
+				// Si son noticias.
+	
+				url += "reportaje&url=" + parametros.get(2);
+	
+				objeto = cargaObjetoDeUrl(actividad, url);
+	
+			} else if (parametros.get(0).compareTo("mas-deporte") == 0) {
+				// Si son noticias.
+	
+				url += "mas_deporte&url=" + parametros.get(4);
+	
+				objeto = cargaObjetoDeUrl(actividad, url);
+	
+			} else if (parametros.get(0).compareTo("burgos-en-persona") == 0) {
+				// Si son noticias.
+	
+				url += "burgos_en_persona&url=" + parametros.get(4);
+	
+				objeto = cargaObjetoDeUrl(actividad, url);
+	
+			} else {
+				// Mostrar mensaje de error
+				Toast.makeText(actividad.getApplicationContext(),
+						"La url no se puede abrir.", Toast.LENGTH_LONG).show();
+	
+				// Salir de la aplicacion.
+				actividad.finish();
+			}
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			Toast.makeText(actividad.getApplicationContext(), "Error al abrir la URL.",
+					Toast.LENGTH_LONG).show();
 		}
 		return objeto;
 	}
@@ -254,23 +260,17 @@ public class Utilidades {
 	 * @param url
 	 * @return objeto
 	 */
-	public static Objeto cargaObjetoDeUrl(Activity actividad, String url) {
+	public static Objeto cargaObjetoDeUrl(Activity actividad, String url){
 
 		ParseadorXML parser = new ParseadorXML(url, Utilidades.KEY_ITEM_OBJETO);
-
-		try {
+		
 			// Si el nodelist es 0 al buscar la clave 'item',
 			// lanzamos excepcion.
 			if (parser.getNodeList().getLength() == 0) {
-				throw new Exception();
+				return null;
 			} else {
 				// Extraer del XML el valor.
 				return new Objeto(parser.getValor(Utilidades.KEY_TITULO), parser.getValor(Utilidades.KEY_DESCRIPCION), parser.getValor(Utilidades.KEY_URL_FOTO), parser.getValor(Utilidades.KEY_URL_VIDEO));
 			}
-		} catch (Exception e) {
-			Toast.makeText(actividad.getApplicationContext(), "Error al abrir la URL.",
-					Toast.LENGTH_LONG).show();
-		}
-		return null;
 	}
 }

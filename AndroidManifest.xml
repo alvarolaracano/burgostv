@@ -21,10 +21,6 @@
 			 <category android:name="android.intent.category.DEFAULT" />
 			 <category android:name="android.intent.category.BROWSABLE" />
 			 <data android:scheme="http" android:host="www.burgostv.es" android:pathPattern="/" />
-			 <data android:scheme="http" android:host="www.burgostv.es" android:pathPattern="/noticias/.*" />
-			 <data android:scheme="http" android:host="www.burgostv.es" android:pathPattern="/reportajes/.*" />
-			 <data android:scheme="http" android:host="www.burgostv.es" android:pathPattern="/mas-deporte/.*" />
-			 <data android:scheme="http" android:host="www.burgostv.es" android:pathPattern="/burgos-en-persona/.*" />
 			</intent-filter>
         </activity>
         <activity android:name="com.alvarolara.burgostv.ListaActivity" android:screenOrientation="portrait">
@@ -38,6 +34,22 @@
                 <action android:name="com.alvarolara.burgostv.ObjetoActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+         <activity android:name="com.alvarolara.burgostv.RedireccionaActivity" >
+            <intent-filter>
+                <action android:name="com.alvarolara.burgostv.RedireccionaActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <!-- Abrir la portada cuando se detecte la url principal -->
+            <intent-filter>
+			 <action android:name="android.intent.action.VIEW" />
+			 <category android:name="android.intent.category.DEFAULT" />
+			 <category android:name="android.intent.category.BROWSABLE" />
+			 <data android:scheme="http" android:host="www.burgostv.es" android:pathPattern="/noticias/.*" />
+			 <data android:scheme="http" android:host="www.burgostv.es" android:pathPattern="/reportajes/.*" />
+			 <data android:scheme="http" android:host="www.burgostv.es" android:pathPattern="/mas-deporte/.*" />
+			 <data android:scheme="http" android:host="www.burgostv.es" android:pathPattern="/burgos-en-persona/.*" />
+			</intent-filter>
         </activity>
         <activity android:name="com.alvarolara.burgostv.BuscarActivity" >
             <intent-filter>

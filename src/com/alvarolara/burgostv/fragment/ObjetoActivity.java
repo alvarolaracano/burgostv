@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -64,13 +65,12 @@ public class ObjetoActivity extends FragmentActivity {
 		
 		if(in.getStringExtra("url")!=null){
 			String url = in.getStringExtra("url");
-			//Uri datos = in.getData();
-			
-			System.out.println("encuentra la url: " + url.toString());
+
+			Log.i("ObjetoActivity","encuentra la url: " + url.toString());
 			objeto = Utilidades.creaUrlObjeto(this, in);
-			System.out.println("el objeto de url: " + objeto.toString());
+			Log.i("ObjetoActivity","el objeto de url: " + objeto.toString());
 		}
-		
+
 		//Obtener la lista. 
 		lista = (ListView)findViewById(android.R.id.list); 
 		// Obtener el adaptador y pasarle los perfiles. 

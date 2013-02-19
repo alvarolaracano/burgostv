@@ -36,7 +36,7 @@ public class PrincipalActivity extends Activity {
 	 */
 	private boolean portrait;
 
-	Intent intent = null;
+	
 
 	/**
 	 * Llamado cuando la Actividad es creada.
@@ -50,8 +50,6 @@ public class PrincipalActivity extends Activity {
 		
 		// Si no hay internet, salimos de la aplicación.
 		if (Utilidades.hayInternet(this, true)) {
-			//Recoger el intent.
-			intent = getIntent();
 			
 			//Establecer layout segun telefono o tablet.
 			if(getResources().getString(R.string.tipo_pantalla).equals("telefono")){
@@ -162,7 +160,6 @@ public class PrincipalActivity extends Activity {
 									DirectoActivity.class);
 							in.putExtra(Utilidades.KEY_URL_STREAMING, url_streaming
 									+ url_stream);
-							Log.i("video: ->", url_streaming + url_stream);
 							startActivity(in);
 						}
 					} else {
@@ -191,42 +188,6 @@ public class PrincipalActivity extends Activity {
 
 			});
 
-		}
-	}
-	
-	
-	
-	@Override
-	public void onResume() {
-	    super.onResume();
-	    System.out.println("volvemos a principal");
-	    if(portrait){
-			
-			if(intent.getData()!=null){
-				//Recibe datos de URL.
-				
-				//Nuevo intent para cargar el objeto.
-				Intent in = new Intent(getApplicationContext(), ObjetoActivity.class);
-				//Enviarle la URL.
-				in.putExtra("url", intent.getData().toString());
-				in.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-				startActivity(in);
-				finish();
-			}
-		}else{
-			if(intent.getData()!=null){
-				//Recibe datos de URL.
-				
-				Intent in = new Intent(getApplicationContext(), com.alvarolara.burgostv.fragment.ObjetoActivity.class);
-				//Enviarle la URL.
-				in.putExtra("url", intent.getData().toString());
-				CargaXML carga = new CargaXML(PrincipalActivity.this, Utilidades.URL_NOTICIAS);
-				in.putExtra("xml", carga.parsea());
-				in.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-				carga.ocultaProgress();
-				startActivity(in);
-				finish();
-			}
 		}
 	}
 	

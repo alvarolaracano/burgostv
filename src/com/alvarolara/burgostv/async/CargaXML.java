@@ -79,12 +79,9 @@ public class CargaXML extends AsyncTask<Void, Void, Void> {
 	/**
 	 * Constructor de clase simple.
 	 */
-	public CargaXML(Context contexto, String URL){
-		this.contexto = contexto;
+	public CargaXML(String URL){
 		this.URL = URL;
 		
-		muestraProgress();
-		progress.show();
 	}
 
 	
@@ -100,7 +97,7 @@ public class CargaXML extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected Void doInBackground(Void... params) {
 
-		Log.i("doInBackground(): ", "proceso en background");
+		Log.i("CargaXML", "proceso en background");
 		
 		menuItems = parsea();
 		
@@ -153,7 +150,7 @@ public class CargaXML extends AsyncTask<Void, Void, Void> {
 			if (parser.getNodeList().getLength() == 0) {
 				throw new Exception();
 			} else {
-				Log.i("for", "ejecuta el for");
+				Log.i("CargaXML", "ejecuta el for");
 				// Todos los <item>.
 				for (int i = 0; i < parser.getNodeList().getLength(); i++) {
 					
@@ -166,7 +163,7 @@ public class CargaXML extends AsyncTask<Void, Void, Void> {
 					// Añadir el Objeto al ArrayList.
 					menuItems.add(aux);
 				}
-				Log.i("for", "acaba el for");
+				Log.i("CargaXML", "acaba el for");
 			}
 		} catch (Exception e) {
 			error = true;
@@ -192,7 +189,7 @@ public class CargaXML extends AsyncTask<Void, Void, Void> {
 	/**
 	 * Oculta el progress.
 	 */
-	public void ocultaProgress(){
+	private void ocultaProgress(){
 		if (progress != null && progress.isShowing()) {
 			progress.dismiss();
 		}

@@ -72,7 +72,7 @@ public class DirectoActivity extends Activity implements OnCompletionListener {
 		//path = "rtsp://218.204.223.237:554/live/1/66251FC11353191F/e7ooqwcfbqjoo80j.sdp";
 		//path = "rtsp://v5.cache1.c.youtube.com/CjYLENy73wIaLQnhycnrJQ8qmRMYESARFEIJbXYtZ29vZ2xlSARSBXdhdGNoYPj_hYjnq6uUTQw=/0/0/0/video.3gp";
 		//path = "rtsp://184.72.239.149/vod/mp4:BigBuckBunny_175k.mov";
-		Log.i("url directo: ",convierteaRSTP(path));
+		Log.i("DirectoActivity","url directo: " + convierteaRSTP(path));
 		//video.setVideoURI(Uri.parse(convierteaRSTP(path)));
 		VVdirecto.setVideoPath(convierteaRSTP(path));
 

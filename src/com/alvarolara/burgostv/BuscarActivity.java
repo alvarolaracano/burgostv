@@ -101,10 +101,10 @@ public class BuscarActivity extends Activity {
 					String tipo = "1";
 					if (RGordenar.getCheckedRadioButtonId() == R.id.RGordenarFecha) {
 						tipo = "1";
-						Log.i("checkbox", "fecha");
+						Log.i("BuscarActivity", "ordenar por fecha");
 					} else if (RGordenar.getCheckedRadioButtonId() == R.id.RGordenarPopularidad) {
 						tipo = "2";
-						Log.i("checkbox", "popularidad");
+						Log.i("BuscarActivity", "ordenar por popularidad");
 					}
 	
 					EditText ETbuscar = (EditText) findViewById(R.id.ETbuscar);
