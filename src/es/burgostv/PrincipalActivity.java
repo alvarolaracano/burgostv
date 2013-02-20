@@ -150,7 +150,7 @@ public class PrincipalActivity extends Activity {
 			 * DIRECTO.
 			 */
 			ImageButton IBdirecto = (ImageButton) findViewById(R.id.IBdirecto);
-			/*
+			
 			IBdirecto.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
@@ -172,7 +172,7 @@ public class PrincipalActivity extends Activity {
 
 				}
 
-			});*/
+			});
 
 			/**
 			 * BUSCAR.
