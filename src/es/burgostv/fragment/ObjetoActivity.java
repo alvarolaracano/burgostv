@@ -1,11 +1,12 @@
-package com.alvarolara.burgostv.fragment;
+package es.burgostv.fragment;
 
 import java.util.ArrayList;
 
-import com.alvarolara.burgostv.R;
-import com.alvarolara.burgostv.clases.Objeto;
-import com.alvarolara.burgostv.utiles.AdaptadorLista;
-import com.alvarolara.burgostv.utiles.Utilidades;
+import es.burgostv.R;
+
+import es.burgostv.clases.Objeto;
+import es.burgostv.utiles.AdaptadorLista;
+import es.burgostv.utiles.Utilidades;
 
 import android.support.v4.app.FragmentActivity;
 import android.content.Intent;

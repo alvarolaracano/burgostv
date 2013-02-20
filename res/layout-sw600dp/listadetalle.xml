@@ -9,12 +9,12 @@
         android:id="@+id/Flista"
         android:layout_width="450dip"
         android:layout_height="match_parent"
-        class="com.alvarolara.burgostv.fragment.ObjetoListaFragment" />
+        class="es.burgostv.fragment.ObjetoListaFragment" />
 
     <fragment
         android:id="@+id/Fdetalle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.alvarolara.burgostv.fragment.ObjetoDetalleFragment" />
+        class="es.burgostv.fragment.ObjetoDetalleFragment" />
 
 </LinearLayout>

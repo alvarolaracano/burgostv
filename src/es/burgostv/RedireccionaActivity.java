@@ -1,7 +1,9 @@
-package com.alvarolara.burgostv;
+package es.burgostv;
 
-import com.alvarolara.burgostv.async.CargaXML;
-import com.alvarolara.burgostv.utiles.Utilidades;
+import es.burgostv.R;
+
+import es.burgostv.async.CargaXML;
+import es.burgostv.utiles.Utilidades;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -37,7 +39,7 @@ public class RedireccionaActivity extends Activity{
 				if(intent.getData()!=null){
 					//Recibe datos de URL.
 					
-					Intent in = new Intent(getApplicationContext(), com.alvarolara.burgostv.fragment.ObjetoActivity.class);
+					Intent in = new Intent(getApplicationContext(), es.burgostv.fragment.ObjetoActivity.class);
 					String datos = intent.getData().toString();
 					//Enviarle la URL.
 					in.putExtra("url", datos);

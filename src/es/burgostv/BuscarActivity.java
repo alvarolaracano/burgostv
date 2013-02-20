@@ -1,7 +1,9 @@
-package com.alvarolara.burgostv;
+package es.burgostv;
 
-import com.alvarolara.burgostv.async.CargaXML;
-import com.alvarolara.burgostv.utiles.Utilidades;
+import es.burgostv.R;
+
+import es.burgostv.async.CargaXML;
+import es.burgostv.utiles.Utilidades;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;

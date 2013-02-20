@@ -1,4 +1,4 @@
-package com.alvarolara.burgostv.utiles;
+package es.burgostv.utiles;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,14 +14,13 @@ import java.util.WeakHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.alvarolara.burgostv.R;
+import es.burgostv.R;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 /**
  * Carga las imagenes.

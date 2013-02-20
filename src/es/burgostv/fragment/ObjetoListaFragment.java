@@ -1,7 +1,8 @@
-package com.alvarolara.burgostv.fragment;
+package es.burgostv.fragment;
 
-import com.alvarolara.burgostv.R;
-import com.alvarolara.burgostv.clases.Objeto;
+import es.burgostv.R;
+
+import es.burgostv.clases.Objeto;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;

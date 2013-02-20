@@ -1,4 +1,4 @@
-package com.alvarolara.burgostv.utiles;
+package es.burgostv.utiles;
 
 import java.io.IOException;
 import java.io.StringReader;

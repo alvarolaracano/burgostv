@@ -1,9 +1,10 @@
-package com.alvarolara.burgostv.utiles;
+package es.burgostv.utiles;
 
 import java.util.ArrayList;
 
-import com.alvarolara.burgostv.R;
-import com.alvarolara.burgostv.clases.Objeto;
+import es.burgostv.R;
+
+import es.burgostv.clases.Objeto;
 
 import android.app.Activity;
 import android.content.Context;

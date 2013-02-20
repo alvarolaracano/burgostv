@@ -1,4 +1,4 @@
-package com.alvarolara.burgostv.utiles;
+package es.burgostv.utiles;
 
 import android.graphics.Paint;
 import android.view.Gravity;

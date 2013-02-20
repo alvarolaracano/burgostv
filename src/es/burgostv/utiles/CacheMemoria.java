@@ -1,4 +1,4 @@
-package com.alvarolara.burgostv.utiles;
+package es.burgostv.utiles;
 
 import java.lang.ref.SoftReference;
 import java.util.Collections;

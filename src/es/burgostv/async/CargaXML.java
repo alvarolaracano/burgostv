@@ -1,15 +1,15 @@
-package com.alvarolara.burgostv.async;
+package es.burgostv.async;
 
 import java.util.ArrayList;
 
 import org.w3c.dom.Element;
 
-import com.alvarolara.burgostv.ErrorActivity;
-import com.alvarolara.burgostv.ListaActivity;
-import com.alvarolara.burgostv.clases.Objeto;
-import com.alvarolara.burgostv.fragment.ObjetoActivity;
-import com.alvarolara.burgostv.utiles.ParseadorXML;
-import com.alvarolara.burgostv.utiles.Utilidades;
+import es.burgostv.ErrorActivity;
+import es.burgostv.ListaActivity;
+import es.burgostv.clases.Objeto;
+import es.burgostv.fragment.ObjetoActivity;
+import es.burgostv.utiles.ParseadorXML;
+import es.burgostv.utiles.Utilidades;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;

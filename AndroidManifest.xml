@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.alvarolara.burgostv"
+      package="es.burgostv"
       android:versionCode="6"
       android:versionName="2.0">
     <application android:icon="@drawable/icono" android:label="@string/nombre_aplicacion">
-        <activity android:name="com.alvarolara.burgostv.SplashActivity" android:label="@string/nombre_aplicacion">
+        <activity android:name="es.burgostv.SplashActivity" android:label="@string/nombre_aplicacion">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.alvarolara.burgostv.PrincipalActivity" >
+        <activity android:name="es.burgostv.PrincipalActivity" >
             <intent-filter>
-                <action android:name="com.alvarolara.burgostv.PrincipalActivity" />
+                <action android:name="es.burgostv.PrincipalActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <!-- Abrir la portada cuando se detecte la url principal -->
@@ -23,21 +23,21 @@
 			 <data android:scheme="http" android:host="www.burgostv.es" android:pathPattern="/" />
 			</intent-filter>
         </activity>
-        <activity android:name="com.alvarolara.burgostv.ListaActivity" android:screenOrientation="portrait">
+        <activity android:name="es.burgostv.ListaActivity" android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="com.alvarolara.burgostv.ListaActivity" />
+                <action android:name="es.burgostv.ListaActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>    
         </activity>
-        <activity android:name="com.alvarolara.burgostv.ObjetoActivity" android:screenOrientation="portrait">
+        <activity android:name="es.burgostv.ObjetoActivity" android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="com.alvarolara.burgostv.ObjetoActivity" />
+                <action android:name="es.burgostv.ObjetoActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-         <activity android:name="com.alvarolara.burgostv.RedireccionaActivity" >
+         <activity android:name="es.burgostv.RedireccionaActivity" >
             <intent-filter>
-                <action android:name="com.alvarolara.burgostv.RedireccionaActivity" />
+                <action android:name="es.burgostv.RedireccionaActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <!-- Abrir la portada cuando se detecte la url principal -->
@@ -51,35 +51,35 @@
 			 <data android:scheme="http" android:host="www.burgostv.es" android:pathPattern="/burgos-en-persona/.*" />
 			</intent-filter>
         </activity>
-        <activity android:name="com.alvarolara.burgostv.BuscarActivity" >
+        <activity android:name="es.burgostv.BuscarActivity" >
             <intent-filter>
-                <action android:name="com.alvarolara.burgostv.BuscarActivity" />
+                <action android:name="es.burgostv.BuscarActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>    
         </activity>
-        <activity android:name="com.alvarolara.burgostv.VideoActivity" android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        <activity android:name="es.burgostv.VideoActivity" android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
-                <action android:name="com.alvarolara.burgostv.VideoActivity" />
+                <action android:name="es.burgostv.VideoActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>    
         </activity>
-        <activity android:name="com.alvarolara.burgostv.DirectoActivity" android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        <activity android:name="es.burgostv.DirectoActivity" android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
-                <action android:name="com.alvarolara.burgostv.DirectoActivity" />
+                <action android:name="es.burgostv.DirectoActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>    
         </activity>
-        <activity android:name="com.alvarolara.burgostv.ErrorActivity" >
+        <activity android:name="es.burgostv.ErrorActivity" >
             <intent-filter>
-                <action android:name="com.alvarolara.burgostv.ErrorActivity" />
+                <action android:name="es.burgostv.ErrorActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>    
         </activity>
-        <activity android:name="com.alvarolara.burgostv.fragment.ObjetoActivity" android:screenOrientation="landscape">
+        <activity android:name="es.burgostv.fragment.ObjetoActivity" android:screenOrientation="landscape">
         </activity>
-        <activity android:name="com.alvarolara.burgostv.fragment.ObjetoDetalleFragment" android:screenOrientation="landscape">
+        <activity android:name="es.burgostv.fragment.ObjetoDetalleFragment" android:screenOrientation="landscape">
         </activity>
-        <activity android:name="com.alvarolara.burgostv.fragment.ObjetoListaFragment" android:screenOrientation="landscape">
+        <activity android:name="es.burgostv.fragment.ObjetoListaFragment" android:screenOrientation="landscape">
         </activity>
     </application>
     <uses-sdk android:minSdkVersion="8" />

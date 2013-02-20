@@ -1,4 +1,4 @@
-package com.alvarolara.burgostv.clases;
+package es.burgostv.clases;
 
 import java.io.Serializable;
 

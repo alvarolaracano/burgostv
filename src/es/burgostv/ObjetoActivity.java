@@ -1,9 +1,11 @@
-package com.alvarolara.burgostv;
+package es.burgostv;
 
-import com.alvarolara.burgostv.clases.Objeto;
-import com.alvarolara.burgostv.utiles.CargadorImagenes;
-import com.alvarolara.burgostv.utiles.JustificaTexto;
-import com.alvarolara.burgostv.utiles.Utilidades;
+import es.burgostv.R;
+
+import es.burgostv.clases.Objeto;
+import es.burgostv.utiles.CargadorImagenes;
+import es.burgostv.utiles.JustificaTexto;
+import es.burgostv.utiles.Utilidades;
 
 import android.app.Activity;
 import android.content.Intent;

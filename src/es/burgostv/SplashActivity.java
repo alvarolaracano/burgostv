@@ -1,6 +1,6 @@
-package com.alvarolara.burgostv;
+package es.burgostv;
 
-import com.alvarolara.burgostv.R;
+import es.burgostv.R;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -1,10 +1,11 @@
-package com.alvarolara.burgostv.fragment;
+package es.burgostv.fragment;
 
-import com.alvarolara.burgostv.R;
-import com.alvarolara.burgostv.VideoActivity;
-import com.alvarolara.burgostv.clases.Objeto;
-import com.alvarolara.burgostv.utiles.CargadorImagenes;
-import com.alvarolara.burgostv.utiles.Utilidades;
+import es.burgostv.R;
+
+import es.burgostv.VideoActivity;
+import es.burgostv.clases.Objeto;
+import es.burgostv.utiles.CargadorImagenes;
+import es.burgostv.utiles.Utilidades;
 
 import android.support.v4.app.Fragment;
 import android.app.Activity;
