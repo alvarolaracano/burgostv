@@ -154,7 +154,7 @@ public class PrincipalActivity extends Activity {
 			IBdirecto.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
-					if (streaming.contains("SI")) {
+					if (streaming.contains("NO")) {
 						// Pasarle al videoView la url del streaming.
 						if (Utilidades.hayInternet(PrincipalActivity.this, false)) {
 							Intent in = new Intent(getApplicationContext(),

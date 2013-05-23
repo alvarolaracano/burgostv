@@ -5,13 +5,16 @@ import es.burgostv.R;
 import es.burgostv.utiles.Utilidades;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
 import android.media.MediaPlayer.OnPreparedListener;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -69,17 +72,17 @@ public class DirectoActivity extends Activity implements OnCompletionListener {
 
 		VVdirecto = (VideoView) findViewById(R.id.VVdirecto);
 		
-		//path =  "rtsp://188.40.15.22/webcam/webcam1";
-		path = "rtsp://188.40.15.22:1935/programado/burgosTV";
-		//path = "rtsp://218.204.223.237:554/live/1/66251FC11353191F/e7ooqwcfbqjoo80j.sdp";
-		//path = "rtsp://v5.cache1.c.youtube.com/CjYLENy73wIaLQnhycnrJQ8qmRMYESARFEIJbXYtZ29vZ2xlSARSBXdhdGNoYPj_hYjnq6uUTQw=/0/0/0/video.3gp";
-		//path = "rtsp://184.72.239.149/vod/mp4:BigBuckBunny_175k.mov";
+		//path = "rtsp://188.40.15.22:554/programado/burgosTV";
+		path= "rtsp://188.40.15.22:554/webcam/webcam1";
+		
 		Log.i("DirectoActivity","url directo: " + convierteaRSTP(path));
 		//video.setVideoURI(Uri.parse(convierteaRSTP(path)));
-		VVdirecto.setVideoPath(convierteaRSTP(path));
+		VVdirecto.setVideoURI(Uri.parse(path));
+		//VVdirecto.setVideoPath(convierteaRSTP(path));
 
 		IVplay = (ImageView) findViewById(R.id.IVplay);
 
+		//VVdirecto.set
 		VVdirecto.setMediaController(controlador);
 		VVdirecto.requestFocus();
 		
@@ -144,8 +147,44 @@ public class DirectoActivity extends Activity implements OnCompletionListener {
 		String pathRTSP = path.replace("rtmp", "rtsp");
 		
 		//añadir el puerto 1935.
-		pathRTSP = pathRTSP.replace("22", "22:1935");
+		pathRTSP = pathRTSP.replace("22", "22:554");
 		return pathRTSP;
+	}
+	
+	
+	/**
+	 * VideoView para directo que redimensiona video
+	 * para que ocupe toda la pantalla.
+	 * @author Alvaro Lara Cano
+	 *
+	 */
+	public class VideoViewDirecto extends VideoView {
+
+	    private int mForceHeight = 0;
+	    private int mForceWidth = 0;
+	    
+	    public VideoViewDirecto(Context context) {
+	        super(context);
+	    }
+
+	    public VideoViewDirecto(Context context, AttributeSet attrs) {
+	        this(context, attrs, 0);
+	    }
+
+	    public VideoViewDirecto(Context context, AttributeSet attrs, int defStyle) {
+	        super(context, attrs, defStyle);
+	    }
+
+	    public void setDimensions(int w, int h) {
+	        this.mForceHeight = h;
+	        this.mForceWidth = w;
+
+	    }
+
+	    @Override
+	    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+	        setMeasuredDimension(mForceWidth, mForceHeight);
+	    }
 	}
 
 }
