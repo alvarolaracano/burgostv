@@ -42,7 +42,7 @@ public class Objeto implements Serializable{
 	
 	
 	/**
-	 * COnstructor vacio.
+	 * Constructor vacio.
 	 */
 	public Objeto(){
 		

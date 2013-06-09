@@ -11,7 +11,6 @@ import es.burgostv.fragment.ObjetoActivity;
 import es.burgostv.utiles.ParseadorXML;
 import es.burgostv.utiles.Utilidades;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -93,7 +92,7 @@ public class CargaXML extends AsyncTask<Void, Void, Void> {
 		progress.show();
 	}
 
-	@SuppressLint("ParserError")
+	
 	@Override
 	protected Void doInBackground(Void... params) {
 

@@ -73,7 +73,11 @@ public class DirectoActivity extends Activity implements OnCompletionListener {
 		VVdirecto = (VideoView) findViewById(R.id.VVdirecto);
 		
 		//path = "rtsp://188.40.15.22:554/programado/burgosTV";
-		path= "rtsp://188.40.15.22:554/webcam/webcam1";
+		//path = "rtsp://212-125.livestream.com:8080/livestreamiphone/4148639_2131179_64430285_1_600@32134";
+		//path = "rtsp://212-125.livestream.com:8080/livestreamiphone/3891754_2079350_785fdd4e_1_198@111080";
+		path= "rtsp://188.40.15.22:554/webcam/webcam2";
+		
+		Toast.makeText(DirectoActivity.this, path, Toast.LENGTH_LONG).show();
 		
 		Log.i("DirectoActivity","url directo: " + convierteaRSTP(path));
 		//video.setVideoURI(Uri.parse(convierteaRSTP(path)));
@@ -82,7 +86,6 @@ public class DirectoActivity extends Activity implements OnCompletionListener {
 
 		IVplay = (ImageView) findViewById(R.id.IVplay);
 
-		//VVdirecto.set
 		VVdirecto.setMediaController(controlador);
 		VVdirecto.requestFocus();
 		
@@ -126,6 +129,9 @@ public class DirectoActivity extends Activity implements OnCompletionListener {
 				((ProgressBar)findViewById(R.id.PBcargando)).setVisibility(View.GONE);
 			}
 		});
+		
+		//Evento para saber si esta cargando el buffer.
+		//VVdirecto.seton
 
 	}
 
